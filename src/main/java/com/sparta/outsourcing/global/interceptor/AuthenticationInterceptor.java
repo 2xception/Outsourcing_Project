@@ -22,12 +22,12 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         final HttpServletRequest request,
         final HttpServletResponse response,
         final Object handler
-    ){
+    )throws Exception{
 
         String tokenValue = jwtUtil.getJwtFromRequest(request);
         String userInfo = jwtUtil.getUserInfoFromToken(tokenValue);
 
-        request.setAttribute("User", userRepository.userBy(userInfo));
+//        request.setAttribute("User", userRepository.userBy(userInfo));
 
         return true;
     }
