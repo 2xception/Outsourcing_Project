@@ -1,8 +1,10 @@
 package com.sparta.outsourcing.domain.user.service;
 
+import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupResponseDto;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
+import com.sparta.outsourcing.domain.user.model.User;
 import com.sparta.outsourcing.domain.user.repository.UserRepository;
 import com.sparta.outsourcing.global.jwt.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -31,5 +33,15 @@ public class UserService {
         userRepository.save(userEntity);
 
         return new SignupResponseDto(userEntity);
+    }
+
+    public String login(LoginRequestDto requestDto) {
+        String username = requestDto.getUsername();
+        String password = requestDto.getPassword();
+
+        User user = userRepository.userBy(username);
+        user.validatePassword(password, passwordEncoder);
+
+        return user.createToken(jwtUtil);
     }
 }

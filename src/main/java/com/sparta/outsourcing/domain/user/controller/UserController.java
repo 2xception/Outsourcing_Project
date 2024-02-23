@@ -1,5 +1,6 @@
 package com.sparta.outsourcing.domain.user.controller;
 
+import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupResponseDto;
 import com.sparta.outsourcing.domain.user.service.UserService;
@@ -7,6 +8,7 @@ import com.sparta.outsourcing.global.commonDto.ResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +28,17 @@ public class UserController {
             .body(ResponseDto.<SignupResponseDto>builder()
                 .message("회원 가입 성공")
                 .data(userService.signup(requestDto))
+                .build());
+    }
+
+    @PostMapping("/api/users/login")
+    @Operation(summary = "로그인 API")
+    public ResponseEntity<ResponseDto<Void>> login(@RequestBody LoginRequestDto requestDto) {
+
+        return ResponseEntity.ok()
+            .header(HttpHeaders.AUTHORIZATION, userService.login(requestDto))
+            .body(ResponseDto.<Void>builder()
+                .message("로그인 성공")
                 .build());
     }
 
