@@ -1,5 +1,13 @@
 package com.sparta.outsourcing.global.commonDto;
 
-public class ResponseDto {
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
+@Builder
+public class ResponseDto<T> {
+
+    private String message;
+    private T data;
 
 }
