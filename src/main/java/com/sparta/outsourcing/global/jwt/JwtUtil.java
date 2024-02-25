@@ -30,11 +30,10 @@ public class JwtUtil {
     private final String EXPIRED_JWT_TOKEN = "Expired JWT token, 만료된 JWT token 입니다.";
     private final String UNSUPPORTED_JWT_TOKEN = "Unsupported JWT token, 지원되지 않는 JWT 토큰 입니다.";
     private final String EMPTY_JWT_CLAIMS = "JWT claims is empty, 잘못된 JWT 토큰 입니다.";
-
+    private final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
     @Value("${jwt.secret.key}") // Base64 Encode 한 SecretKey
     private String secretKey;
     private Key key;
-    private final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
     @PostConstruct
     public void init() {
@@ -54,16 +53,13 @@ public class JwtUtil {
                 .compact();
     }
 
-    public String getUserInfoFromToken(String bearerToken) {
-        String token = substringToken(bearerToken);
-        if (validateToken((token))) {
-            return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody()
-                .getSubject();
-        }
-        throw new IllegalArgumentException("오류");
+    public String getUserInfoFromToken(String token) {
+        return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody()
+            .getSubject();
     }
 
-    private String substringToken(String tokenValue) {
+
+    public String substringToken(String tokenValue) {
         if (!StringUtils.hasText(tokenValue) || !tokenValue.startsWith(BEARER_PREFIX)) {
             throw new JwtException(INVALID_JWT_SIGNATURE);
         }
@@ -75,7 +71,7 @@ public class JwtUtil {
         return request.getHeader(AUTHORIZATION_HEADER);
     }
 
-    private boolean validateToken(String token) {
+    public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
