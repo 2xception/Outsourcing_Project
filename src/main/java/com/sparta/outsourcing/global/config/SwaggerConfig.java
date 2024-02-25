@@ -17,7 +17,7 @@ public class SwaggerConfig {
     }
 
     @Bean
-    public OpenAPI springShopOpenAPI() {
+    public OpenAPI springOutsourcingOpenAPI() {
         String title = "outsourcing Application Swagger";
         String description = "outsourcing Application 팀 프로젝트의 Swagger 문서입니다.";
 

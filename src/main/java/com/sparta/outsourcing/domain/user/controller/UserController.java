@@ -3,7 +3,9 @@ package com.sparta.outsourcing.domain.user.controller;
 import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupResponseDto;
+import com.sparta.outsourcing.domain.user.model.User;
 import com.sparta.outsourcing.domain.user.service.UserService;
+import com.sparta.outsourcing.global.argumentResolver.UserInfo;
 import com.sparta.outsourcing.global.commonDto.ResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -19,6 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+
+    // test
+    @PostMapping("/api/test")
+    @Operation(summary = "jwt 유저 인증 테스트 api")
+    public ResponseEntity<ResponseDto<Void>> test(
+        @UserInfo User user) {
+        return ResponseEntity.ok()
+            .body(ResponseDto.<Void>builder()
+                .message(user.toEntity().getUsername())
+                .build());
+    }
 
     @PostMapping("/api/users/signup")
     @Operation(summary = "회원 가입 API")
