@@ -71,7 +71,7 @@ public class PostController {
 		@PathVariable Long id,
 		@RequestAttribute("User") User user) {
 
-		return postService.updatePost(id,user);
+		return postService.deletePost(id,user);
 	}
 
 }

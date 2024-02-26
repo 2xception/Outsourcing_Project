@@ -12,6 +12,7 @@ public class PostResponseDto {
     private Long postId;
     private String title;
     private String content;
+    private String nickname;
     private Long views;
     private LocalDateTime createdAt;
 }

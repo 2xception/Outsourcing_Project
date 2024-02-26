@@ -1,5 +1,6 @@
 package com.sparta.outsourcing.domain.post.entity;
 
+import com.sparta.outsourcing.domain.post.dto.PostRequestDto;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -39,4 +40,11 @@ public class PostEntity {
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private UserEntity userEntity;
+
+    public PostEntity(PostRequestDto requestDto, UserEntity entity) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.views = 0L;
+        this.userEntity = entity;
+    }
 }

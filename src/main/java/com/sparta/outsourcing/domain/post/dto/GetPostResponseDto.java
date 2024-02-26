@@ -12,6 +12,7 @@ public class GetPostResponseDto {
     private Long postId;
     private String title;
     private String content;
+    private String nickname;
     private Long views;
     private LocalDateTime createdAt;
 
@@ -19,6 +20,7 @@ public class GetPostResponseDto {
         this.postId = postEntity.getPostId();
         this.title = postEntity.getTitle();
         this.content = postEntity.getContent();
+        this.nickname = postEntity.getUserEntity().getNickname();
         this.views = postEntity.getViews();
         this.createdAt = postEntity.getCreatedAt();
     }
