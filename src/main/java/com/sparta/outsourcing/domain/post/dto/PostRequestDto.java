@@ -2,9 +2,11 @@ package com.sparta.outsourcing.domain.post.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class PostRequestDto {
 
     @NotBlank(message = "제목을 입력해 주세요.")

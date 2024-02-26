@@ -19,7 +19,7 @@ public class GetPostListResponseDto {
 	public GetPostListResponseDto(PostEntity postEntity) {
 		this.postId = postEntity.getPostId();
 		this.title = postEntity.getTitle();
-		this.content = postEntity.getContent().substring(0, 20);
+		this.content = postEntity.getContent().length()>20 ? postEntity.getContent().substring(0, 20): postEntity.getContent();
 		this.nickname = postEntity.getUserEntity().getNickname();
 		this.views = postEntity.getViews();
 		this.createdAt = postEntity.getCreatedAt();

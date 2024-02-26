@@ -55,16 +55,6 @@ public class Post {
 		);
 	}
 
-	public PostResponseDto responseDto() {
-		return new PostResponseDto(
-			postId,
-			title,
-			content,
-			userEntity.getNickname(),
-			views,
-			createdAt
-		);
-	}
 
 	public void viewCount() {
 		views++;

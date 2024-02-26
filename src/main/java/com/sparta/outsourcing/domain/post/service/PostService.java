@@ -6,7 +6,6 @@ import static com.sparta.outsourcing.domain.post.service.StatusCheck.success;
 
 import com.sparta.outsourcing.domain.post.controller.model.Post;
 import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto;
-import com.sparta.outsourcing.domain.post.dto.GetPostResponseDto;
 import com.sparta.outsourcing.domain.post.dto.PostRequestDto;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import com.sparta.outsourcing.domain.post.repository.PostRepository;
@@ -30,7 +29,7 @@ public class PostService {
 	public ResponseEntity<ResponseDto<?>> createPost(User user, PostRequestDto requestDto) {
 		PostEntity postEntity = new PostEntity(requestDto, user.toEntity());
 		postRepository.save(postEntity);
-		return success("포스트 작성에 성공하셨습니다.", Post.from(postEntity).responseDto());
+		return success("포스트 작성에 성공하셨습니다.", Post.from(postEntity).ResponseDto());
 	}
 
 	public ResponseEntity<ResponseDto<?>> getOrderDatePost() {

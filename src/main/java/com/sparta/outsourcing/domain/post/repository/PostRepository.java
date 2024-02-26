@@ -4,6 +4,7 @@ import com.sparta.outsourcing.domain.post.controller.model.Post;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import java.util.List;
 
+
 public interface PostRepository {
 
 	Post findByPostId(Long id);
