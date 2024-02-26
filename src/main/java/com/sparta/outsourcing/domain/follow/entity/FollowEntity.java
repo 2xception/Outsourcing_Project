@@ -25,4 +25,9 @@ public class FollowEntity {
     @ManyToOne
     @JoinColumn(name = "following_id")
     private UserEntity following;
+
+    public FollowEntity(UserEntity entity, UserEntity findUser) {
+        this.follower = entity;
+        this.following = findUser;
+    }
 }

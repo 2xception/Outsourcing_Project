@@ -3,6 +3,7 @@ package com.sparta.outsourcing.domain.user.repository;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
 import com.sparta.outsourcing.domain.user.model.User;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
@@ -28,5 +29,10 @@ public class UserRepositoryImpl implements UserRepository{
         return User.from(userJpaRepository.findByUsername(userName).orElseThrow(
             () -> new NoSuchElementException("사용자를 찾을 수 없습니다.")
         ));
+    }
+
+    @Override
+    public Optional<UserEntity> finById(Long id) {
+        return userJpaRepository.findById(id);
     }
 }
