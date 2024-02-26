@@ -4,8 +4,10 @@ import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupResponseDto;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
+import com.sparta.outsourcing.domain.user.model.Token;
 import com.sparta.outsourcing.domain.user.model.User;
 import com.sparta.outsourcing.domain.user.repository.UserRepository;
+import com.sparta.outsourcing.domain.user.repository.token.TokenRepository;
 import com.sparta.outsourcing.global.jwt.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,14 +16,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class UserService {
 
     private final UserRepository userRepository;
+    private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
-    @Transactional
     public SignupResponseDto signup(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
         String password = passwordEncoder.encode(requestDto.getPassword());
@@ -43,5 +45,11 @@ public class UserService {
         user.validatePassword(password, passwordEncoder);
 
         return user.createToken(jwtUtil);
+    }
+
+    @Transactional
+    public void logout(String accessToken) {
+        Token token = tokenRepository.findBy(accessToken);
+        token.expireToken();
     }
 }

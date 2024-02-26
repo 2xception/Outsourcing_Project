@@ -12,8 +12,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -52,6 +54,18 @@ public class UserController {
             .header(HttpHeaders.AUTHORIZATION, userService.login(requestDto))
             .body(ResponseDto.<Void>builder()
                 .message("로그인 성공")
+                .build());
+    }
+
+    @PatchMapping("/v1/users/logout")
+    public ResponseEntity<ResponseDto<Void>> logout(
+        @RequestHeader(value = "Authorization") String accessToken) {
+
+        userService.logout(accessToken);
+
+        return ResponseEntity.ok()
+            .body(ResponseDto.<Void>builder()
+                .message("로그아웃 성공")
                 .build());
     }
 
