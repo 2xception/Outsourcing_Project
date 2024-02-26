@@ -52,7 +52,7 @@ public class PostEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime createdAt;
 
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private UserEntity userEntity;
