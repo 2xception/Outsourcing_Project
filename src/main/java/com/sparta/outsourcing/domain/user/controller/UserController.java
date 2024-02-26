@@ -57,7 +57,7 @@ public class UserController {
                 .build());
     }
 
-    @PatchMapping("/v1/users/logout")
+    @PatchMapping("/api/users/logout")
     public ResponseEntity<ResponseDto<Void>> logout(
         @RequestHeader(value = "Authorization") String accessToken) {
 

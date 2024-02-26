@@ -6,4 +6,7 @@ public interface TokenRepository {
 
     Token findBy(String accessToken);
 
+    void save(String token);
+
+    void update(Token token);
 }

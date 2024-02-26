@@ -43,13 +43,18 @@ public class UserService {
 
         User user = userRepository.userBy(username);
         user.validatePassword(password, passwordEncoder);
+        String token = user.createToken(jwtUtil);
 
-        return user.createToken(jwtUtil);
+        tokenRepository.save(token);
+
+        return token;
     }
 
     @Transactional
     public void logout(String accessToken) {
         Token token = tokenRepository.findBy(accessToken);
         token.expireToken();
+
+        tokenRepository.update(token);
     }
 }
