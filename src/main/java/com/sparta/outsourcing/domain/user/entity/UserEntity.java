@@ -1,11 +1,15 @@
 package com.sparta.outsourcing.domain.user.entity;
 
+import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,10 +37,14 @@ public class UserEntity {
     @Column(nullable = false, unique = true)
     private String nickname;
 
+    @Column(nullable = false)
     private String photo;
 
+    @OneToMany(mappedBy = "postEntity")
+    private List<PostEntity> postList = new ArrayList<>();
 
-    public UserEntity(String username, String password, String email, String nickname) {
+    public UserEntity(Long userId, String username, String password, String email, String nickname,
+        String photo) {
         this.username = username;
         this.password = password;
         this.email = email;
