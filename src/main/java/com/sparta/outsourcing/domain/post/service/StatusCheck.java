@@ -1,6 +1,7 @@
 package com.sparta.outsourcing.domain.post.service;
 
 import com.sparta.outsourcing.global.commonDto.ResponseDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 public class StatusCheck {
@@ -20,7 +21,7 @@ public class StatusCheck {
 	}
 
 	static ResponseEntity<ResponseDto<?>> forBidden(String msg) {
-		return ResponseEntity.status(403).body(ResponseDto.builder()
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ResponseDto.builder()
 			.message(msg)
 			.data(null)
 			.build());
