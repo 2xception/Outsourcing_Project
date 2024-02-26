@@ -1,16 +1,20 @@
 package com.sparta.outsourcing.post.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.BDDMockito.given;
 
+import com.sparta.outsourcing.domain.post.controller.model.Post;
 import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto;
 import com.sparta.outsourcing.domain.post.dto.GetPostResponseDto;
 import com.sparta.outsourcing.domain.post.dto.PostRequestDto;
+import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import com.sparta.outsourcing.domain.post.repository.PostRepository;
 import com.sparta.outsourcing.domain.post.service.PostService;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
 import com.sparta.outsourcing.domain.user.model.User;
 import com.sparta.outsourcing.global.commonDto.ResponseDto;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +22,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 
 @ExtendWith(MockitoExtension.class)
 public class PostServiceTest {
@@ -38,7 +43,7 @@ public class PostServiceTest {
 	}
 
 	@Test
-	@DisplayName("post 생성 테스트")
+	@DisplayName("게시물 생성 테스트")
 	void createPost(){
 		//given
 		PostRequestDto postRequestDto = new PostRequestDto("제목","내용");
@@ -50,6 +55,38 @@ public class PostServiceTest {
 		assertEquals(responseDto.getContent(),postRequestDto.getContent());
 		assertEquals(responseDto.getNickname(),"nick");
 		assertEquals(response.getBody().getMessage(),"포스트 작성에 성공하셨습니다.");
+	}
+
+	@Test
+	@DisplayName("게시물 수정 테스트")
+	void updatePost(){
+		//given
+		PostRequestDto postRequestDto = new PostRequestDto("제목","내용");
+		PostRequestDto postRequestDto2 = new PostRequestDto("제목수정","내용수정");
+		User user = testUser();
+		PostEntity postEntity = new PostEntity(postRequestDto,user.toEntity());
+		given(postRepository.findByPostId(postEntity.getPostId())).willReturn(Optional.of(postEntity));
+		//when
+		ResponseEntity<ResponseDto<?>> response = postService.updatePost(postEntity.getPostId(),user,postRequestDto2);
+		//then
+		GetPostResponseDto responseDto = (GetPostResponseDto) response.getBody().getData();
+		assertEquals(responseDto.getContent(),postRequestDto2.getContent());
+		assertEquals(responseDto.getTitle(),postRequestDto2.getTitle());
+		assertEquals(response.getBody().getMessage(),"게시물 수정에 성공하셨습니다.");
+	}
+
+	@Test
+	@DisplayName("게시물 삭제 테스트")
+	void deletePost(){
+		//given
+		PostRequestDto postRequestDto = new PostRequestDto("제목","내용");
+		User user = testUser();
+		PostEntity postEntity = new PostEntity(postRequestDto,user.toEntity());
+		given(postRepository.findByPostId(postEntity.getPostId())).willReturn(Optional.of(postEntity));
+		//when
+		ResponseEntity<ResponseDto<?>> response = postService.deletePost(postEntity.getPostId(),user);
+		//then
+		assertEquals(response.getBody().getMessage(),"게시물 삭제에 성공하셨습니다.");
 	}
 
 
