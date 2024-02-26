@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 
 
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 @EnableJpaAuditing
+@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 public class OutsourcingApplication {
 
     public static void main(String[] args) {
