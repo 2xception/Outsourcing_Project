@@ -56,6 +56,10 @@ public class User {
         this.photo = requsetDto.getPhoto();
     }
 
+    public void changePassword(String newPassword) {
+        this.password = newPassword;
+    }
+
     public ProfileResponseDto profileResponseDto() {
         return new ProfileResponseDto(nickname, email, photo);
     }

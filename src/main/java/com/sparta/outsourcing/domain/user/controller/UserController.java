@@ -1,5 +1,6 @@
 package com.sparta.outsourcing.domain.user.controller;
 
+import com.sparta.outsourcing.domain.user.dto.ChangePasswordRequestDto;
 import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
 import com.sparta.outsourcing.domain.user.dto.ProfileRequsetDto;
 import com.sparta.outsourcing.domain.user.dto.ProfileResponseDto;
@@ -76,8 +77,19 @@ public class UserController {
 
         return ResponseEntity.ok()
             .body(ResponseDto.<ProfileResponseDto>builder()
-                .message("조회 성공")
+                .message("프로필 수정 성공")
                 .data(userService.updateProfile(requsetDto, user))
+                .build());
+    }
+
+    @PostMapping("/api/users/change-password")
+    @Operation(summary = "비밀번호 변경 API")
+    public ResponseEntity<ResponseDto<ProfileResponseDto>> changePassword(
+        @RequestBody @Valid ChangePasswordRequestDto requestDto, @UserInfo User user) {
+        return ResponseEntity.ok()
+            .body(ResponseDto.<ProfileResponseDto>builder()
+                .message("비밀번호 변경 성공")
+                .data(userService.changePassword(requestDto, user))
                 .build());
     }
 }

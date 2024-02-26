@@ -1,5 +1,6 @@
 package com.sparta.outsourcing.domain.user.service;
 
+import com.sparta.outsourcing.domain.user.dto.ChangePasswordRequestDto;
 import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
 import com.sparta.outsourcing.domain.user.dto.ProfileRequsetDto;
 import com.sparta.outsourcing.domain.user.dto.ProfileResponseDto;
@@ -55,6 +56,20 @@ public class UserService {
     public ProfileResponseDto updateProfile(ProfileRequsetDto requsetDto, User user) {
         user.update(requsetDto);
         userRepository.update(user);
+
+        return user.profileResponseDto();
+    }
+
+    @Transactional
+    public ProfileResponseDto changePassword(ChangePasswordRequestDto requestDto, User user) {
+        String existingPassword = requestDto.getExistingPassword();
+        String newPassword = requestDto.getNewPassword();
+
+        user.validatePassword(existingPassword, passwordEncoder);
+        user.changePassword(passwordEncoder.encode(newPassword));
+
+        userRepository.update(user);
+
         return user.profileResponseDto();
     }
 }
