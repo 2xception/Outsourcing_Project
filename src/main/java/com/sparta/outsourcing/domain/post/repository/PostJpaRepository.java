@@ -8,8 +8,14 @@ import java.util.List;
 import java.util.Optional;
 import javax.swing.text.html.Option;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 public interface PostJpaRepository extends JpaRepository<PostEntity, Long> {
 
   List<PostLikeEntity> findAllByUser(User user);
+
+	List<PostEntity> findAllByOrderByCreatedAtDesc();
+
+	List<PostEntity> findAllByOrderByViewsDesc();
+
 }

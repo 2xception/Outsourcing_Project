@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class GetPostListResponseDto {
+public class GetPostResponseDto {
 
 	private Long postId;
 	private String title;
@@ -16,12 +16,10 @@ public class GetPostListResponseDto {
 	private Long views;
 	private LocalDateTime createdAt;
 
-	public GetPostListResponseDto(PostEntity postEntity) {
+	public GetPostResponseDto(PostEntity postEntity) {
 		this.postId = postEntity.getPostId();
 		this.title = postEntity.getTitle();
-		this.content =
-			postEntity.getContent().length() > 20 ? postEntity.getContent().substring(0, 20)
-				: postEntity.getContent();
+		this.content = postEntity.getContent();
 		this.nickname = postEntity.getUserEntity().getNickname();
 		this.views = postEntity.getViews();
 		this.createdAt = postEntity.getCreatedAt();

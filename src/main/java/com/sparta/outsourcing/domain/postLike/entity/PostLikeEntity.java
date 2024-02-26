@@ -16,8 +16,8 @@ import java.util.Optional;
 import lombok.Getter;
 
 @Entity
+@Table(name = "TB_POST_LIKE")
 @Getter
-@Table(name = "POST_LIKE")
 public class PostLikeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

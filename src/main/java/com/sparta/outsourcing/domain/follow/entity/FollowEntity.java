@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 
 @Entity
+@Table(name = "TB_FOLLOW")
 @Getter
 @Table(name = "FOLLOW")
 public class FollowEntity {
