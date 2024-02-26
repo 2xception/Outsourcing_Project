@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.util.Optional;
 import lombok.Getter;
 
 @Entity
@@ -26,4 +27,13 @@ public class PostLikeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private PostEntity postEntity;
+
+    @ManyToOne(fetch =  FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserEntity userEntity;
+
+    public PostLikeEntity(PostEntity post, UserEntity user) {
+        this.postEntity = post;
+        this.userEntity = user;
+    }
 }
