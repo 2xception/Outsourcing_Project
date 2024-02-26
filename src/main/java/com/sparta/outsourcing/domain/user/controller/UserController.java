@@ -1,6 +1,7 @@
 package com.sparta.outsourcing.domain.user.controller;
 
 import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
+import com.sparta.outsourcing.domain.user.dto.ProfileResponseDto;
 import com.sparta.outsourcing.domain.user.dto.SignupRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupResponseDto;
 import com.sparta.outsourcing.domain.user.model.User;
@@ -12,6 +13,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,4 +57,13 @@ public class UserController {
                 .build());
     }
 
+    @GetMapping("/api/users")
+    @Operation(summary = "프로필 조회 API")
+    public ResponseEntity<ResponseDto<ProfileResponseDto>> getProfile(@UserInfo User user) {
+        return ResponseEntity.ok()
+            .body(ResponseDto.<ProfileResponseDto>builder()
+                .message("조회 성공")
+                .data(userService.getProfile(user))
+                .build());
+    }
 }
