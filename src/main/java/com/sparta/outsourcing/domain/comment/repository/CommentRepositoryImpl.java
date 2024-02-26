@@ -1,6 +1,7 @@
 package com.sparta.outsourcing.domain.comment.repository;
 
 import com.sparta.outsourcing.domain.comment.entity.CommentEntity;
+import java.util.List;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,12 @@ public class CommentRepositoryImpl implements CommentRepository {
   public CommentEntity save(CommentEntity commentEntity) {
     return commentJpaRepository.save(commentEntity);
   }
+
+  @Override
+  public List<CommentEntity> findByPostEntityPostId(long postId) {
+    return commentJpaRepository.findByPostEntityPostId(postId);
+  }
+
 
   @Override
   public List<CommentEntity> findByUserEntityUserId(Long userId) {
