@@ -1,6 +1,9 @@
 package com.sparta.outsourcing.domain.post.repository;
 
-import com.sparta.outsourcing.domain.post.model.Post;
+import com.sparta.outsourcing.domain.post.controller.model.Post;
+import com.sparta.outsourcing.domain.post.entity.PostEntity;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -8,13 +11,35 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class PostRepositoryImpl implements PostRepository {
 
-  private final PostJpaRepository postJpaRepository;
+	private final PostJpaRepository postJpaRepository;
 
-  @Override
-  public Post findPostBy(long postId) {
-    return Post.from(postJpaRepository.findById(postId).orElseThrow(
-        () -> new IllegalArgumentException("없는 게시글입니다."))
-    );
-  }
+	@Override
+	public Optional<PostEntity> findByPostId(Long id) {
+		return postJpaRepository.findById(id);
+	}
 
+	@Override
+	public void save(PostEntity postEntity) {
+		postJpaRepository.save(postEntity);
+	}
+
+	@Override
+	public void delete(Post post) {
+		postJpaRepository.delete(post.toEntity());
+	}
+
+	@Override
+	public void update(Post post) {
+		postJpaRepository.saveAndFlush(post.toEntity());
+	}
+
+	@Override
+	public List<PostEntity> findAllByOrderByCreatedAtDesc() {
+		return postJpaRepository.findAllByOrderByCreatedAtDesc();
+	}
+
+	@Override
+	public List<PostEntity> findAllByOrderByViewsDesc() {
+		return postJpaRepository.findAllByOrderByViewsDesc();
+	}
 }

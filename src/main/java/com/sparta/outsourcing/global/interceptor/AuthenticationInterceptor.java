@@ -26,6 +26,8 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         String token = jwtUtil.substringToken(tokenValue);
         jwtUtil.validateToken(token);
 
+
+
         return true;
     }
 
