@@ -5,13 +5,10 @@ import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import com.sparta.outsourcing.domain.post.repository.PostRepository;
 import com.sparta.outsourcing.domain.postLike.entity.PostLikeEntity;
-import com.sparta.outsourcing.domain.postLike.model.PostLike;
 import com.sparta.outsourcing.domain.postLike.repository.PostLikeRepository;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
 import com.sparta.outsourcing.domain.user.model.User;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -28,7 +25,8 @@ public class PostService {
 
   //게시물전체조회 - 내가 좋아요표시
   public List<GetPostListResponseDto> getPostsSortedByLikes(User user) {
-    List<PostLikeEntity> postLikeList = postLikeRepository.findAllByUser(user); //user모델 안으로, 엔티티객체 서비스에서X , 엔티티로넘어오는걸 바꾸고
+    //좋아요 표시한 게시글 가져오기
+    List<PostLikeEntity> postLikeList = postLikeRepository.findAllByUser(user);
     if(postLikeList.isEmpty()) {
       throw new IllegalArgumentException("좋아요 표시한 게시글이 없습니다.");
     }
@@ -57,12 +55,4 @@ public class PostService {
 
     return postList.stream().map(PostEntity::toDto).toList();
   }
-
-  //게시물 좋아요 추가
-
-  //게시물 좋아요 삭제
-
-  //팔로우
-
-  //언팔로우
 }

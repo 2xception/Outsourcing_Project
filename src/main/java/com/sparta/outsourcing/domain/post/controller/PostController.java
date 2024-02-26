@@ -1,7 +1,6 @@
 package com.sparta.outsourcing.domain.post.controller;
 
 import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto;
-import com.sparta.outsourcing.domain.post.model.Post;
 import com.sparta.outsourcing.domain.post.service.PostService;
 import com.sparta.outsourcing.domain.user.model.User;
 import com.sparta.outsourcing.global.argumentResolver.UserInfo;
@@ -10,7 +9,6 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -50,7 +48,7 @@ public class PostController {
   public ResponseEntity<ResponseDto<List<GetPostListResponseDto>>> getPosts () {
     return ResponseEntity.ok()
         .body(ResponseDto.<List<GetPostListResponseDto>>builder()
-            .message("팔로우한 유저 게시물 조회 성공")
+            .message("게시물 전체 조회 성공")
             .data(postService.getPosts())
             .build());
   }
