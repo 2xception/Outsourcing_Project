@@ -43,8 +43,16 @@ public class UserEntity {
     @OneToMany(mappedBy = "postEntity")
     private List<PostEntity> postList = new ArrayList<>();
 
-    public UserEntity(Long userId, String username, String password, String email, String nickname,
+    public UserEntity(String username, String password, String email, String nickname,
         String photo) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.nickname = nickname;
+        this.photo = photo;
+    }
+
+    public UserEntity(String username, String password, String email, String nickname) {
         this.username = username;
         this.password = password;
         this.email = email;

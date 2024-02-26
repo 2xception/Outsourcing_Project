@@ -9,6 +9,6 @@ public interface PostRepository {
 
   List<PostEntity> findAll(Sort postLikeList);
 
-  Optional<PostEntity> finById(String postId);
+  Optional<PostEntity> finById(Long postId);
 
 }

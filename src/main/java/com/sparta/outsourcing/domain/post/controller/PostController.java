@@ -52,12 +52,4 @@ public class PostController {
             .data(postService.getPosts())
             .build());
   }
-
-  //게시물 좋아요 추가
-
-  //게시물 좋아요 삭제
-
-  //팔로우
-
-  //언팔로우
 }

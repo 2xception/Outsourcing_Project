@@ -29,7 +29,7 @@ public class UserService {
         String nickname = username;
         userRepository.validateUserDuplicate(username);
 
-        UserEntity userEntity = new UserEntity(userId, username, password, email, nickname, photo);
+        UserEntity userEntity = new UserEntity(username, password, email, nickname);
         userRepository.save(userEntity);
 
         return new SignupResponseDto(userEntity);

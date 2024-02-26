@@ -10,7 +10,7 @@ public interface PostLikeRepository {
 
   List<PostLikeEntity> findAllByUser(User user);
 
-  Optional<PostLikeEntity> findByIdAndUser(String postId, User user);
+  Optional<PostLikeEntity> findByIdAndUser(Long postId, User user);
 
   void save(PostLikeEntity postLikeEntity);
 

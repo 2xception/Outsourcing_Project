@@ -21,7 +21,7 @@ public class PostLikeController {
 
   //게시물 좋아요 추가
   @PostMapping("{postId}/likes")
-  public ResponseEntity<ResponseDto> addLike (@PathVariable String postId, @UserInfo User user) {
+  public ResponseEntity<ResponseDto> addLike (@PathVariable Long postId, @UserInfo User user) {
     postLikeService.addLike(postId, user);
     return ResponseEntity.ok()
         .body(ResponseDto.builder()
@@ -31,7 +31,7 @@ public class PostLikeController {
 
   //게시물 좋아요 삭제
   @DeleteMapping("{postId}/likes")
-  public ResponseEntity<ResponseDto> deleteLike (@PathVariable String postId, @UserInfo User user) {
+  public ResponseEntity<ResponseDto> deleteLike (@PathVariable Long postId, @UserInfo User user) {
     postLikeService.deleteLike(postId, user);
     return ResponseEntity.ok()
         .body(ResponseDto.builder()

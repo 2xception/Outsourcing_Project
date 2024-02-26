@@ -22,7 +22,7 @@ public class PostLikeRepositoryImpl implements PostLikeRepository {
   }
 
   @Override
-  public Optional<PostLikeEntity> findByIdAndUser(String postId, User user) {
+  public Optional<PostLikeEntity> findByIdAndUser(Long postId, User user) {
     return postLikeJpaRepository.findByIdAndUser(postId, user);
   }
 
