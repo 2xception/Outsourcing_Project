@@ -9,4 +9,5 @@ public interface PostJpaRepository extends JpaRepository<PostEntity, Long> {
 	List<PostEntity> findAllByOrderByCreatedAtDesc();
 
 	List<PostEntity> findAllByOrderByViewsDesc();
+
 }

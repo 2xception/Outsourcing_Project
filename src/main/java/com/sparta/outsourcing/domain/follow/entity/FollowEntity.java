@@ -12,4 +12,6 @@ public class FollowEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long FollowsId;
+
+
 }

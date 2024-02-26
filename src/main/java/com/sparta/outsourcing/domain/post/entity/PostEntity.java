@@ -32,11 +32,11 @@ public class PostEntity {
     private Long views;
 
     @CreatedDate
+    @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "createdAt", updatable = false)
     private LocalDateTime createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private UserEntity userEntity;

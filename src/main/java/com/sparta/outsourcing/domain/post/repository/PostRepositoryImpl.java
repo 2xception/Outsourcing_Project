@@ -3,6 +3,7 @@ package com.sparta.outsourcing.domain.post.repository;
 import com.sparta.outsourcing.domain.post.controller.model.Post;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -13,10 +14,8 @@ public class PostRepositoryImpl implements PostRepository {
 	private final PostJpaRepository postJpaRepository;
 
 	@Override
-	public Post findByPostId(Long id) {
-		return Post.from(postJpaRepository.findById(id).orElseThrow(() ->
-			new IllegalArgumentException("선택하신 게시물은 존재하지 않습니다.")
-		));
+	public Optional<PostEntity> findByPostId(Long id) {
+		return postJpaRepository.findById(id);
 	}
 
 	@Override
@@ -43,5 +42,4 @@ public class PostRepositoryImpl implements PostRepository {
 	public List<PostEntity> findAllByOrderByViewsDesc() {
 		return postJpaRepository.findAllByOrderByViewsDesc();
 	}
-
 }

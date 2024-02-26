@@ -13,6 +13,7 @@ import com.sparta.outsourcing.domain.user.model.User;
 import com.sparta.outsourcing.global.commonDto.ResponseDto;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class PostService {
 		if (posts.isEmpty()) {
 			return badRequest("현재 작성된 게시물이 없습니다.");
 		}
-		return success("조회순 전체 게시물 조회에 성공하셨습니다.",
+		return success("작성순 전체 게시물 조회에 성공하셨습니다.",
 			posts.stream().map(GetPostListResponseDto::new).toList());
 	}
 
@@ -52,7 +53,11 @@ public class PostService {
 
 	@Transactional
 	public ResponseEntity<ResponseDto<?>> getPost(Long id) {
-		Post post = postRepository.findByPostId(id);
+		Optional<PostEntity> postEntity = postRepository.findByPostId(id);
+		if(postEntity.isEmpty()){
+			return badRequest("해당 id값의 게시글이 없습니다.");
+		}
+		Post post = Post.from(postEntity.get());
 		post.viewCount();
 		postRepository.update(post);
 		return success("게시물 조회에 성공하셨습니다.", post.ResponseDto());
@@ -61,7 +66,11 @@ public class PostService {
 	@Transactional
 	public ResponseEntity<ResponseDto<?>> updatePost(Long id, User user,
 		PostRequestDto requestDto) {
-		Post post = postRepository.findByPostId(id);
+		Optional<PostEntity> postEntity = postRepository.findByPostId(id);
+		if(postEntity.isEmpty()){
+			return badRequest("해당 id값의 게시글이 없습니다.");
+		}
+		Post post = Post.from(postEntity.get());
 		if (!Objects.equals(post.getUserEntity().getUserId(), user.toEntity().getUserId())) {
 			return forBidden("이 게시물을 수정하실 권한이 없습니다.");
 		}
@@ -72,7 +81,11 @@ public class PostService {
 
 	@Transactional
 	public ResponseEntity<ResponseDto<?>> deletePost(Long id, User user) {
-		Post post = postRepository.findByPostId(id);
+		Optional<PostEntity> postEntity = postRepository.findByPostId(id);
+		if(postEntity.isEmpty()){
+			return badRequest("해당 id값의 게시글이 없습니다.");
+		}
+		Post post = Post.from(postEntity.get());
 		if (!Objects.equals(post.getUserEntity().getUserId(), user.toEntity().getUserId())) {
 			return forBidden("이 게시물을 삭제하실 권한이 없습니다.");
 		}

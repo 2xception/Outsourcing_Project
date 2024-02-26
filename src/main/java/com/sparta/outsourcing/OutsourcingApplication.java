@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-@ComponentScan(basePackages = "com.sparta.outsourcing")
+@EnableJpaAuditing
 public class OutsourcingApplication {
 
     public static void main(String[] args) {
