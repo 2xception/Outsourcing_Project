@@ -72,7 +72,7 @@ public class UserController {
     @PutMapping("/api/users")
     @Operation(summary = "프로필 수정 API")
     public ResponseEntity<ResponseDto<ProfileResponseDto>> updateProfile(
-        @RequestBody ProfileRequsetDto requsetDto, @UserInfo User user) {
+        @RequestBody @Valid ProfileRequsetDto requsetDto, @UserInfo User user) {
 
         return ResponseEntity.ok()
             .body(ResponseDto.<ProfileResponseDto>builder()
