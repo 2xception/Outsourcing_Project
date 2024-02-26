@@ -9,4 +9,6 @@ public interface TokenRepository {
     void save(String token);
 
     void update(Token token);
+
+    void validateExpired(String token);
 }

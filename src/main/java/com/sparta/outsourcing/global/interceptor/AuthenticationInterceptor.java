@@ -1,6 +1,7 @@
 package com.sparta.outsourcing.global.interceptor;
 
 
+import com.sparta.outsourcing.domain.user.repository.token.TokenRepository;
 import com.sparta.outsourcing.global.jwt.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @RequiredArgsConstructor
 public class AuthenticationInterceptor implements HandlerInterceptor {
     private final JwtUtil jwtUtil;
+    private final TokenRepository tokenRepository;
 
     @Override
     public boolean preHandle(
@@ -23,6 +25,8 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     )throws Exception{
 
         String tokenValue = jwtUtil.getJwtFromRequest(request);
+        tokenRepository.validateExpired(tokenValue);
+
         String token = jwtUtil.substringToken(tokenValue);
         jwtUtil.validateToken(token);
 
