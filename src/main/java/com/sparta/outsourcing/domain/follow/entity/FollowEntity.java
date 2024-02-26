@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "FOLLOW")
+@Table(name = "TB_FOLLOW")
 public class FollowEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
