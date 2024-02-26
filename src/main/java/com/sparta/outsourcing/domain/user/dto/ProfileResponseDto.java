@@ -6,9 +6,9 @@ import lombok.Getter;
 @Getter
 public class ProfileResponseDto {
 
-	String nickname;
-	String email;
-	String photo;
+	private String nickname;
+	private String email;
+	private String photo;
 
 	public ProfileResponseDto(String nickname, String email, String photo) {
 		this.nickname = nickname;

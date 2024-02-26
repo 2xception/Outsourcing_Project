@@ -1,6 +1,7 @@
 package com.sparta.outsourcing.domain.user.service;
 
 import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
+import com.sparta.outsourcing.domain.user.dto.ProfileRequsetDto;
 import com.sparta.outsourcing.domain.user.dto.ProfileResponseDto;
 import com.sparta.outsourcing.domain.user.dto.SignupRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupResponseDto;
@@ -47,9 +48,13 @@ public class UserService {
     }
 
     public ProfileResponseDto getProfile(User user) {
-        String nickname = user.toEntity().getNickname();
-        String email = user.toEntity().getEmail();
-        String photo = user.toEntity().getPhoto();
-        return new ProfileResponseDto(nickname, email, photo);
+        return user.profileResponseDto();
+    }
+
+    @Transactional
+    public ProfileResponseDto updateProfile(ProfileRequsetDto requsetDto, User user) {
+        user.update(requsetDto);
+        userRepository.update(user);
+        return user.profileResponseDto();
     }
 }

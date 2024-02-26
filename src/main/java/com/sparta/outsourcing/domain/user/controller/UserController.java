@@ -1,6 +1,7 @@
 package com.sparta.outsourcing.domain.user.controller;
 
 import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
+import com.sparta.outsourcing.domain.user.dto.ProfileRequsetDto;
 import com.sparta.outsourcing.domain.user.dto.ProfileResponseDto;
 import com.sparta.outsourcing.domain.user.dto.SignupRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupResponseDto;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -64,6 +66,18 @@ public class UserController {
             .body(ResponseDto.<ProfileResponseDto>builder()
                 .message("조회 성공")
                 .data(userService.getProfile(user))
+                .build());
+    }
+
+    @PutMapping("/api/users")
+    @Operation(summary = "프로필 수정 API")
+    public ResponseEntity<ResponseDto<ProfileResponseDto>> updateProfile(
+        @RequestBody ProfileRequsetDto requsetDto, @UserInfo User user) {
+
+        return ResponseEntity.ok()
+            .body(ResponseDto.<ProfileResponseDto>builder()
+                .message("조회 성공")
+                .data(userService.updateProfile(requsetDto, user))
                 .build());
     }
 }
