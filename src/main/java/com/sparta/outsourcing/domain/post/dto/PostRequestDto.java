@@ -9,13 +9,13 @@ import lombok.Getter;
 @AllArgsConstructor
 public class PostRequestDto {
 
-    @NotBlank(message = "제목을 입력해 주세요.")
-    @Size(max=30)
-    private String title;
+	@NotBlank(message = "제목을 입력해 주세요.")
+	@Size(max = 30)
+	private String title;
 
-    @NotBlank(message = "내용을 입력해 주세요.")
-    @Size(max = 1024)
-    private String content;
+	@NotBlank(message = "내용을 입력해 주세요.")
+	@Size(max = 1024)
+	private String content;
 
 
 }
