@@ -6,6 +6,7 @@ import com.sparta.outsourcing.global.argumentResolver.UserInfo;
 import com.sparta.outsourcing.global.commonDto.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +30,12 @@ public class PostLikeController {
   }
 
   //게시물 좋아요 삭제
-
-  //팔로우
-
-  //언팔로우
+  @DeleteMapping("{postId}/likes")
+  public ResponseEntity<ResponseDto> deleteLike (@PathVariable String postId, @UserInfo User user) {
+    postLikeService.deleteLike(postId, user);
+    return ResponseEntity.ok()
+        .body(ResponseDto.builder()
+            .message("게시물 좋아요 삭제 성공")
+            .build());
+  }
 }

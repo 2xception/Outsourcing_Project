@@ -13,4 +13,6 @@ public interface PostLikeRepository {
   Optional<PostLikeEntity> findByIdAndUser(String postId, User user);
 
   void save(PostLikeEntity postLikeEntity);
+
+  void delete(PostLikeEntity postLikeEntity);
 }

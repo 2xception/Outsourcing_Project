@@ -28,4 +28,13 @@ public class PostLikeService {
     }
   }
 
+  //게시물 좋아요 삭제
+  public void deleteLike(String postId, User user) {
+    Optional<PostLikeEntity> postLikeEntity = postLikeRepository.findByIdAndUser(postId, user);
+    if(postLikeEntity.isEmpty()) {
+      throw new IllegalArgumentException("좋아요를 누르지 않은 게시글입니다.");
+    } else {
+      postLikeRepository.delete(postLikeEntity.get());
+    }
+  }
 }

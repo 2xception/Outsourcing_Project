@@ -30,4 +30,9 @@ public class PostLikeRepositoryImpl implements PostLikeRepository {
   public void save(PostLikeEntity postLikeEntity) {
     postLikeJpaRepository.save(postLikeEntity);
   }
+
+  @Override
+  public void delete(PostLikeEntity postLikeEntity) {
+    postLikeJpaRepository.delete(postLikeEntity);
+  }
 }
