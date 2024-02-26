@@ -14,7 +14,7 @@ public class CommentResponseDto {
   private int likes;
 
   public CommentResponseDto(CommentEntity savedComment) {
-    //this.comment = savedComment.getComment();
+    this.comment = savedComment.getComment();
   }
 
 }
