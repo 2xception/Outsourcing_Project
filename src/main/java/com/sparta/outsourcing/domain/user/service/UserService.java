@@ -21,6 +21,7 @@ import com.sparta.outsourcing.domain.user.repository.token.TokenRepository;
 import com.sparta.outsourcing.global.jwt.JwtUtil;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -80,21 +81,9 @@ public class UserService {
 
         ProfileResponseDto profileResponseDto = user.profileResponseDto();
 
-        List<GetPostResponseDto> postResponseDtos = postRepository
-            .findByUserEntityUserId(user.toEntity().getUserId()).stream()
-            .map(GetPostResponseDto::new)
-            .collect(Collectors.toList());
-
-        List<CommentResponseDto> commentResponseDtos = commentRepository
-            .findByUserEntityUserId(user.toEntity().getUserId()).stream()
-            .map(CommentResponseDto::new)
-            .collect(Collectors.toList());
-
-        List<GetProfileResponseDto> getProfileResponseDtos = getFollowerListBy(user);
-
-        profileResponseDto.setMyPosts(postResponseDtos);
-        profileResponseDto.setMyComments(commentResponseDtos);
-        profileResponseDto.setMyFollowers(getProfileResponseDtos);
+        profileResponseDto.setMyPosts(getPostResponseDtoListBy(user));
+        profileResponseDto.setMyComments(getCommentResponseDtoListBy(user));
+        profileResponseDto.setMyFollowers(getFollowerListBy(user));
 
         return profileResponseDto;
     }
@@ -126,9 +115,25 @@ public class UserService {
         return getProfile(user);
     }
 
+    public List<GetPostResponseDto> getPostResponseDtoListBy(User user) {
+        return postRepository
+            .findByUserEntityUserId(user.toEntity().getUserId()).stream()
+            .filter(Objects::nonNull)
+            .map(GetPostResponseDto::new)
+            .collect(Collectors.toList());
+    }
+
+    public List<CommentResponseDto> getCommentResponseDtoListBy(User user) {
+        return commentRepository
+            .findByUserEntityUserId(user.toEntity().getUserId()).stream()
+            .filter(Objects::nonNull)
+            .map(CommentResponseDto::new)
+            .collect(Collectors.toList());
+    }
+
     public List<GetProfileResponseDto> getFollowerListBy(User user) {
-        List<FollowEntity> followEntities = followRepository.findAllByFollowing(user.toEntity());
-        return followEntities.stream()
+        return followRepository.findAllByFollowing(user.toEntity()).stream()
+            .filter(Objects::nonNull)
             .map(followEntity -> new GetProfileResponseDto(followEntity.getFollower()))
             .collect(Collectors.toList());
     }

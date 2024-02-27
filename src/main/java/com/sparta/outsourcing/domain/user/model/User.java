@@ -83,7 +83,4 @@ public class User {
         return new ProfileResponseDto(nickname, email, photo);
     }
 
-    public GetProfileResponseDto getProfileResponseDto(User user) {
-        return user.getProfileResponseDto(user);
-    }
 }
