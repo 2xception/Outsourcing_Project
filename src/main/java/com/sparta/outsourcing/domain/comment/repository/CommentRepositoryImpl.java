@@ -4,8 +4,6 @@ import com.sparta.outsourcing.domain.comment.entity.CommentEntity;
 import com.sparta.outsourcing.domain.comment.model.Comment;
 import java.util.List;
 import java.util.NoSuchElementException;
-import com.sparta.outsourcing.domain.post.entity.PostEntity;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
