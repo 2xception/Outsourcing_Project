@@ -2,16 +2,15 @@ package com.sparta.outsourcing.domain.post.controller.model;
 
 import com.sparta.outsourcing.domain.post.dto.GetPostResponseDto;
 import com.sparta.outsourcing.domain.post.dto.PostRequestDto;
-import com.sparta.outsourcing.domain.post.dto.PostResponseDto;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
-import com.sparta.outsourcing.domain.post.repository.PostRepository;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
-import lombok.AllArgsConstructor;
-
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class Post {
 
@@ -63,10 +62,6 @@ public class Post {
 	public void update(PostRequestDto requestDto) {
 		this.title = requestDto.getTitle();
 		this.content = requestDto.getContent();
-	}
-
-	public boolean validateById(Long postId) {
-		return this.postId.equals(postId);
 	}
 
 }

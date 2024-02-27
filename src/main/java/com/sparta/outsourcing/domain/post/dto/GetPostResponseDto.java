@@ -15,13 +15,4 @@ public class GetPostResponseDto {
 	private String nickname;
 	private Long views;
 	private LocalDateTime createdAt;
-
-	public GetPostResponseDto(PostEntity postEntity) {
-		this.postId = postEntity.getPostId();
-		this.title = postEntity.getTitle();
-		this.content = postEntity.getContent();
-		this.nickname = postEntity.getUserEntity().getNickname();
-		this.views = postEntity.getViews();
-		this.createdAt = postEntity.getCreatedAt();
-	}
 }
