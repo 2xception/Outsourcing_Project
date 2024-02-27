@@ -138,4 +138,6 @@ public class PostService {
 		postRepository.delete(post);
 		return success("게시물 삭제에 성공하셨습니다.", "");
 	}
+
+
 }

@@ -12,5 +12,9 @@ public interface UserRepository {
 
     User userBy(String username);
 
+    void update(User user);
+
+    User userById(Long id);
+
     Optional<UserEntity> finById(Long id);
 }

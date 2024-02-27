@@ -1,6 +1,9 @@
 package com.sparta.outsourcing.domain.user.controller;
 
+import com.sparta.outsourcing.domain.user.dto.ChangePasswordRequestDto;
 import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
+import com.sparta.outsourcing.domain.user.dto.ProfileRequsetDto;
+import com.sparta.outsourcing.domain.user.dto.ProfileResponseDto;
 import com.sparta.outsourcing.domain.user.dto.SignupRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupResponseDto;
 import com.sparta.outsourcing.domain.user.model.User;
@@ -12,8 +15,13 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -52,6 +60,61 @@ public class UserController {
             .header(HttpHeaders.AUTHORIZATION, userService.login(requestDto))
             .body(ResponseDto.<Void>builder()
                 .message("로그인 성공")
+                .build());
+    }
+
+    @GetMapping("/api/users")
+    @Operation(summary = "프로필 조회 API")
+    public ResponseEntity<ResponseDto<ProfileResponseDto>> getProfile(@UserInfo User user) {
+        return ResponseEntity.ok()
+            .body(ResponseDto.<ProfileResponseDto>builder()
+                .message("조회 성공")
+                .data(userService.getProfile(user))
+                .build());
+    }
+
+    @PutMapping("/api/users")
+    @Operation(summary = "프로필 수정 API")
+    public ResponseEntity<ResponseDto<ProfileResponseDto>> updateProfile(
+        @RequestBody @Valid ProfileRequsetDto requsetDto, @UserInfo User user) {
+
+        return ResponseEntity.ok()
+            .body(ResponseDto.<ProfileResponseDto>builder()
+                .message("프로필 수정 성공")
+                .data(userService.updateProfile(requsetDto, user))
+                .build());
+    }
+
+    @PostMapping("/api/users/change-password")
+    @Operation(summary = "비밀번호 변경 API")
+    public ResponseEntity<ResponseDto<ProfileResponseDto>> changePassword(
+        @RequestBody @Valid ChangePasswordRequestDto requestDto, @UserInfo User user) {
+        return ResponseEntity.ok()
+            .body(ResponseDto.<ProfileResponseDto>builder()
+                .message("비밀번호 변경 성공")
+                .data(userService.changePassword(requestDto, user))
+                .build());
+    }
+
+    @GetMapping("/api/users/{id}/profile")
+    @Operation(summary = "다른 유저 프로필 조회")
+    public ResponseEntity<ResponseDto<ProfileResponseDto>> getOtherProfile(@PathVariable Long id) {
+        return ResponseEntity.ok()
+            .body(ResponseDto.<ProfileResponseDto>builder()
+                .message("조회 성공")
+                .data(userService.getOtherProfile(id))
+                .build());
+    }
+
+    @PatchMapping("/api/users/logout")
+    public ResponseEntity<ResponseDto<Void>> logout(
+        @RequestHeader(value = "Authorization") String accessToken) {
+
+        userService.logout(accessToken);
+
+        return ResponseEntity.ok()
+            .body(ResponseDto.<Void>builder()
+                .message("로그아웃 성공")
                 .build());
     }
 

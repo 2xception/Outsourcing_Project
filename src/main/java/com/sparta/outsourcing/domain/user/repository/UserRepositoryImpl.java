@@ -35,4 +35,16 @@ public class UserRepositoryImpl implements UserRepository{
     public Optional<UserEntity> finById(Long id) {
         return userJpaRepository.findById(id);
     }
+
+    @Override
+    public void update(User user) {
+        userJpaRepository.saveAndFlush(user.toEntity());
+    }
+
+    @Override
+    public User userById(Long id) {
+        return User.from(userJpaRepository.findById(id).orElseThrow(
+            () -> new NoSuchElementException("사용자를 찾을 수 없습니다.")
+        ));
+    }
 }

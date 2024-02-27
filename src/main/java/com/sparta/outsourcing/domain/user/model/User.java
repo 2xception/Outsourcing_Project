@@ -1,5 +1,7 @@
 package com.sparta.outsourcing.domain.user.model;
 
+import com.sparta.outsourcing.domain.user.dto.ProfileRequsetDto;
+import com.sparta.outsourcing.domain.user.dto.ProfileResponseDto;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
 import com.sparta.outsourcing.global.jwt.JwtUtil;
 import lombok.AllArgsConstructor;
@@ -48,4 +50,18 @@ public class User {
     public String createToken(JwtUtil jwtUtil) {
         return jwtUtil.createToken(username);
     }
+
+    public void update(ProfileRequsetDto requsetDto) {
+        this.nickname = requsetDto.getNickname();
+        this.photo = requsetDto.getPhoto();
+    }
+
+    public void changePassword(String newPassword) {
+        this.password = newPassword;
+    }
+
+    public ProfileResponseDto profileResponseDto() {
+        return new ProfileResponseDto(nickname, email, photo);
+    }
+
 }
