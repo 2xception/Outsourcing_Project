@@ -42,6 +42,7 @@ public class UserService {
         String password = requestDto.getPassword();
 
         User user = userRepository.userBy(username);
+
         user.validatePassword(password, passwordEncoder);
         String token = user.createToken(jwtUtil);
 
