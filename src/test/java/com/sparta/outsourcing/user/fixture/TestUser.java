@@ -1,4 +1,4 @@
-package com.sparta.outsourcing.fixture;
+package com.sparta.outsourcing.user.fixture;
 
 import com.sparta.outsourcing.domain.user.model.User;
 

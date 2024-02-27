@@ -1,4 +1,4 @@
-package com.sparta.outsourcing.mock;
+package com.sparta.outsourcing.user.mock;
 
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
 import com.sparta.outsourcing.domain.user.model.User;

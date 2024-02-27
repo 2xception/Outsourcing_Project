@@ -1,4 +1,4 @@
-package com.sparta.outsourcing.domain.user.service;
+package com.sparta.outsourcing.user.service;
 
 import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupRequestDto;

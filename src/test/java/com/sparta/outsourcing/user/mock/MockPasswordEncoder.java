@@ -1,4 +1,4 @@
-package com.sparta.outsourcing.mock;
+package com.sparta.outsourcing.user.mock;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 

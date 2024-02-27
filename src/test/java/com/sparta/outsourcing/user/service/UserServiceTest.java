@@ -1,4 +1,4 @@
-package com.sparta.outsourcing.domain.user.service;
+package com.sparta.outsourcing.user.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,11 +9,11 @@ import com.sparta.outsourcing.domain.user.dto.SignupRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupResponseDto;
 import com.sparta.outsourcing.domain.user.repository.UserRepository;
 import com.sparta.outsourcing.domain.user.repository.token.TokenRepository;
-import com.sparta.outsourcing.fixture.TestUser;
 import com.sparta.outsourcing.global.jwt.JwtUtil;
-import com.sparta.outsourcing.mock.MockPasswordEncoder;
-import com.sparta.outsourcing.mock.MockTokenRepository;
-import com.sparta.outsourcing.mock.MockUserRepository;
+import com.sparta.outsourcing.user.fixture.TestUser;
+import com.sparta.outsourcing.user.mock.MockPasswordEncoder;
+import com.sparta.outsourcing.user.mock.MockTokenRepository;
+import com.sparta.outsourcing.user.mock.MockUserRepository;
 import java.util.NoSuchElementException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
