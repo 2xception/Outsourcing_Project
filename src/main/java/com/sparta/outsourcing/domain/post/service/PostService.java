@@ -57,6 +57,10 @@ public class PostService {
     List<UserEntity> followingUser = followingList.stream().map(FollowEntity::getFollowing).toList();
 		List<PostEntity> followingUserPost = followingUser.stream().flatMap(userEntity -> userEntity.getPostList().stream()).toList();
 
+		if(followingList.isEmpty()) {
+			throw new IllegalArgumentException("팔로우한 사용자가 없습니다.");
+		}
+
     return followingUserPost.stream().map(PostEntity::toDto).toList();
   }
 
