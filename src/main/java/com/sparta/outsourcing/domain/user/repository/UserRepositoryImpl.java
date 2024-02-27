@@ -37,7 +37,7 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public User userById(Long id) {
-        return User.from(userJpaRepository.findByUserId(id).orElseThrow(
+        return User.from(userJpaRepository.findById(id).orElseThrow(
             () -> new NoSuchElementException("사용자를 찾을 수 없습니다.")
         ));
     }
