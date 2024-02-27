@@ -72,4 +72,10 @@ public class UserService {
 
         return user.profileResponseDto();
     }
+
+    public ProfileResponseDto getOtherProfile(Long id) {
+        User user = userRepository.userById(id);
+
+        return user.profileResponseDto();
+    }
 }

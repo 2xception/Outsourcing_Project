@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -90,6 +91,16 @@ public class UserController {
             .body(ResponseDto.<ProfileResponseDto>builder()
                 .message("비밀번호 변경 성공")
                 .data(userService.changePassword(requestDto, user))
+                .build());
+    }
+
+    @GetMapping("/api/users/{id}/profile")
+    @Operation(summary = "다른 유저 프로필 조회")
+    public ResponseEntity<ResponseDto<ProfileResponseDto>> getOtherProfile(@PathVariable Long id) {
+        return ResponseEntity.ok()
+            .body(ResponseDto.<ProfileResponseDto>builder()
+                .message("조회 성공")
+                .data(userService.getOtherProfile(id))
                 .build());
     }
 }
