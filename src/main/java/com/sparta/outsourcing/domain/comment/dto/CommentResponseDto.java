@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CommentResponseDto {
 
+  private String nickname;
   private String comment;
-  private int likes;
+  private long likes;
 
   public CommentResponseDto(CommentEntity savedComment) {
     this.comment = savedComment.getComment();

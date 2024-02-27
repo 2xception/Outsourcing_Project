@@ -1,14 +1,9 @@
 package com.sparta.outsourcing.domain.user.service;
 
 import com.sparta.outsourcing.domain.comment.dto.CommentResponseDto;
-import com.sparta.outsourcing.domain.comment.entity.CommentEntity;
 import com.sparta.outsourcing.domain.comment.repository.CommentRepository;
-import com.sparta.outsourcing.domain.post.controller.model.Post;
 import com.sparta.outsourcing.domain.post.dto.GetPostResponseDto;
-import com.sparta.outsourcing.domain.post.dto.PostResponseDto;
-import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import com.sparta.outsourcing.domain.post.repository.PostRepository;
-import com.sparta.outsourcing.domain.post.service.PostService;
 import com.sparta.outsourcing.domain.user.dto.ChangePasswordRequestDto;
 import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
 import com.sparta.outsourcing.domain.user.dto.ProfileRequsetDto;
@@ -21,7 +16,6 @@ import com.sparta.outsourcing.domain.user.model.User;
 import com.sparta.outsourcing.domain.user.repository.UserRepository;
 import com.sparta.outsourcing.domain.user.repository.token.TokenRepository;
 import com.sparta.outsourcing.global.jwt.JwtUtil;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
