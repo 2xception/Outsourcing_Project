@@ -1,6 +1,5 @@
 package com.sparta.outsourcing.domain.comment.dto;
 
-import com.sparta.outsourcing.domain.comment.entity.CommentEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CommentResponseDto {
 
+  private String nickname;
   private String comment;
-  private int likes;
-
-  public CommentResponseDto(CommentEntity savedComment) {
-    this.comment = savedComment.getComment();
-  }
+  private long likes;
 
 }

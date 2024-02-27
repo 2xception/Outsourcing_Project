@@ -1,6 +1,7 @@
 package com.sparta.outsourcing.domain.comment.repository;
 
 import com.sparta.outsourcing.domain.comment.entity.CommentEntity;
+import com.sparta.outsourcing.domain.comment.model.Comment;
 import java.util.List;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import java.util.List;
@@ -21,6 +22,22 @@ public class CommentRepositoryImpl implements CommentRepository {
   @Override
   public List<CommentEntity> findByPostEntityPostId(long postId) {
     return commentJpaRepository.findByPostEntityPostId(postId);
+  }
+
+  @Override
+  public Comment findById(long commentId) {
+    return Comment.from(commentJpaRepository.findById(commentId)
+        .orElseThrow(() -> new IllegalArgumentException("없는 댓글입니다.")));
+  }
+
+  @Override
+  public void deleteComment(CommentEntity commentEntity) {
+    commentJpaRepository.delete(commentEntity);
+  }
+
+  @Override
+  public void update(CommentEntity commentEntity) {
+    commentJpaRepository.saveAndFlush(commentEntity);
   }
 
 
