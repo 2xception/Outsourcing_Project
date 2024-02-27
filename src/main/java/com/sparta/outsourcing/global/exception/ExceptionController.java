@@ -24,6 +24,7 @@ public class ExceptionController {
     @ExceptionHandler({
         NoSuchElementException.class,
         BadCredentialsException.class,
+        IllegalArgumentException.class,
     })
     public ResponseEntity<ExceptionDto> handleBadRequestException(Exception e) {
         return createResponse(HttpStatus.BAD_REQUEST, e.getMessage());
