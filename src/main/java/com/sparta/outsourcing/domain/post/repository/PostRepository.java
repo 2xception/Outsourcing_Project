@@ -20,4 +20,5 @@ public interface PostRepository {
 
 	List<PostEntity> findAllByOrderByViewsDesc();
 
+	List<PostEntity> findByUserEntityUserId(Long userId);
 }

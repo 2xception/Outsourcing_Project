@@ -1,5 +1,11 @@
 package com.sparta.outsourcing.domain.user.service;
 
+import com.sparta.outsourcing.domain.post.controller.model.Post;
+import com.sparta.outsourcing.domain.post.dto.GetPostResponseDto;
+import com.sparta.outsourcing.domain.post.dto.PostResponseDto;
+import com.sparta.outsourcing.domain.post.entity.PostEntity;
+import com.sparta.outsourcing.domain.post.repository.PostRepository;
+import com.sparta.outsourcing.domain.post.service.PostService;
 import com.sparta.outsourcing.domain.user.dto.ChangePasswordRequestDto;
 import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
 import com.sparta.outsourcing.domain.user.dto.ProfileRequsetDto;
@@ -10,6 +16,8 @@ import com.sparta.outsourcing.domain.user.entity.UserEntity;
 import com.sparta.outsourcing.domain.user.model.User;
 import com.sparta.outsourcing.domain.user.repository.UserRepository;
 import com.sparta.outsourcing.global.jwt.JwtUtil;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PostRepository postRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
@@ -49,7 +58,16 @@ public class UserService {
     }
 
     public ProfileResponseDto getProfile(User user) {
-        return user.profileResponseDto();
+        ProfileResponseDto profileResponseDto = user.profileResponseDto();
+        List<PostEntity> posts = postRepository.findByUserEntityUserId(user.toEntity().getUserId());
+        List<GetPostResponseDto> postResponseDtos = new ArrayList<>();
+
+        for(PostEntity postEntity : posts) {
+            postResponseDtos.add(new GetPostResponseDto(postEntity));
+        }
+
+        profileResponseDto.setMyPosts(postResponseDtos);
+        return profileResponseDto;
     }
 
     @Transactional

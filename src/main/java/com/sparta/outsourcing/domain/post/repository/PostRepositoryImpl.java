@@ -42,4 +42,9 @@ public class PostRepositoryImpl implements PostRepository {
 	public List<PostEntity> findAllByOrderByViewsDesc() {
 		return postJpaRepository.findAllByOrderByViewsDesc();
 	}
+
+	@Override
+	public List<PostEntity> findByUserEntityUserId(Long userId) {
+		return postJpaRepository.findByUserEntityUserId(userId);
+	}
 }
