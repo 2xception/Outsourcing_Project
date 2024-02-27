@@ -1,5 +1,8 @@
 package com.sparta.outsourcing.domain.user.service;
 
+import com.sparta.outsourcing.domain.comment.dto.CommentResponseDto;
+import com.sparta.outsourcing.domain.comment.entity.CommentEntity;
+import com.sparta.outsourcing.domain.comment.repository.CommentRepository;
 import com.sparta.outsourcing.domain.post.controller.model.Post;
 import com.sparta.outsourcing.domain.post.dto.GetPostResponseDto;
 import com.sparta.outsourcing.domain.post.dto.PostResponseDto;
@@ -18,6 +21,7 @@ import com.sparta.outsourcing.domain.user.repository.UserRepository;
 import com.sparta.outsourcing.global.jwt.JwtUtil;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +34,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+    private final CommentRepository commentRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
@@ -58,15 +63,22 @@ public class UserService {
     }
 
     public ProfileResponseDto getProfile(User user) {
-        ProfileResponseDto profileResponseDto = user.profileResponseDto();
-        List<PostEntity> posts = postRepository.findByUserEntityUserId(user.toEntity().getUserId());
-        List<GetPostResponseDto> postResponseDtos = new ArrayList<>();
 
-        for(PostEntity postEntity : posts) {
-            postResponseDtos.add(new GetPostResponseDto(postEntity));
-        }
+        ProfileResponseDto profileResponseDto = user.profileResponseDto();
+
+        List<GetPostResponseDto> postResponseDtos = postRepository
+            .findByUserEntityUserId(user.toEntity().getUserId()).stream()
+            .map(GetPostResponseDto::new)
+            .collect(Collectors.toList());
+
+        List<CommentResponseDto> commentResponseDtos = commentRepository
+            .findByUserEntityUserId(user.toEntity().getUserId()).stream()
+            .map(CommentResponseDto::new)
+            .collect(Collectors.toList());
 
         profileResponseDto.setMyPosts(postResponseDtos);
+        profileResponseDto.setMyComments(commentResponseDtos);
+
         return profileResponseDto;
     }
 

@@ -1,6 +1,7 @@
 package com.sparta.outsourcing.domain.user.dto;
 
 
+import com.sparta.outsourcing.domain.comment.dto.CommentResponseDto;
 import com.sparta.outsourcing.domain.post.dto.GetPostResponseDto;
 import java.util.List;
 import lombok.Getter;
@@ -12,6 +13,7 @@ public class ProfileResponseDto {
 	private String email;
 	private String photo;
 	private List<GetPostResponseDto> myPosts;
+	private List<CommentResponseDto> myComments;
 
 	public ProfileResponseDto(String nickname, String email, String photo) {
 		this.nickname = nickname;
@@ -21,5 +23,9 @@ public class ProfileResponseDto {
 
 	public void setMyPosts(List<GetPostResponseDto> myPosts) {
 		this.myPosts = myPosts;
+	}
+
+	public void setMyComments(List<CommentResponseDto> myComments) {
+		this.myComments = myComments;
 	}
 }
