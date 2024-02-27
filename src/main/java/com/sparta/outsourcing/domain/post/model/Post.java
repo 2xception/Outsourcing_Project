@@ -37,7 +37,8 @@ public class Post {
         content,
         views,
         createdAt,
-        userEntity
+        userEntity,
+        null // TODO:
     );
   }
 
