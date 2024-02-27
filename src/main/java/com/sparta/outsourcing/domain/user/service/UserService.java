@@ -2,9 +2,12 @@ package com.sparta.outsourcing.domain.user.service;
 
 import com.sparta.outsourcing.domain.comment.dto.CommentResponseDto;
 import com.sparta.outsourcing.domain.comment.repository.CommentRepository;
+import com.sparta.outsourcing.domain.follow.entity.FollowEntity;
+import com.sparta.outsourcing.domain.follow.repository.FollowRepository;
 import com.sparta.outsourcing.domain.post.dto.GetPostResponseDto;
 import com.sparta.outsourcing.domain.post.repository.PostRepository;
 import com.sparta.outsourcing.domain.user.dto.ChangePasswordRequestDto;
+import com.sparta.outsourcing.domain.user.dto.GetProfileResponseDto;
 import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
 import com.sparta.outsourcing.domain.user.dto.ProfileRequsetDto;
 import com.sparta.outsourcing.domain.user.dto.ProfileResponseDto;
@@ -16,6 +19,7 @@ import com.sparta.outsourcing.domain.user.model.User;
 import com.sparta.outsourcing.domain.user.repository.UserRepository;
 import com.sparta.outsourcing.domain.user.repository.token.TokenRepository;
 import com.sparta.outsourcing.global.jwt.JwtUtil;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +38,8 @@ public class UserService {
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final FollowRepository followRepository;
+
 
     public SignupResponseDto signup(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
@@ -84,8 +90,11 @@ public class UserService {
             .map(CommentResponseDto::new)
             .collect(Collectors.toList());
 
+        List<GetProfileResponseDto> getProfileResponseDtos = getFollowerListBy(user);
+
         profileResponseDto.setMyPosts(postResponseDtos);
         profileResponseDto.setMyComments(commentResponseDtos);
+        profileResponseDto.setMyFollowers(getProfileResponseDtos);
 
         return profileResponseDto;
     }
@@ -116,4 +125,12 @@ public class UserService {
 
         return getProfile(user);
     }
+
+    public List<GetProfileResponseDto> getFollowerListBy(User user) {
+        List<FollowEntity> followEntities = followRepository.findAllByFollowing(user.toEntity());
+        return followEntities.stream()
+            .map(followEntity -> new GetProfileResponseDto(followEntity.getFollower()))
+            .collect(Collectors.toList());
+    }
+
 }

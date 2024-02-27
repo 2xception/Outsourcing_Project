@@ -5,6 +5,7 @@ import com.sparta.outsourcing.domain.follow.repository.FollowRepository;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
 import com.sparta.outsourcing.domain.user.model.User;
 import com.sparta.outsourcing.domain.user.repository.UserRepository;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
