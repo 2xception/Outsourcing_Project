@@ -8,6 +8,7 @@ import com.sparta.outsourcing.domain.comment.repository.CommentRepository;
 import com.sparta.outsourcing.domain.commentLike.dto.CommentLikeByComment;
 import com.sparta.outsourcing.domain.commentLike.repository.CommentLikeRepository;
 import com.sparta.outsourcing.domain.post.controller.model.Post;
+import com.sparta.outsourcing.domain.post.model.Post;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import com.sparta.outsourcing.domain.post.repository.PostRepository;
 import com.sparta.outsourcing.domain.user.model.User;

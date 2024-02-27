@@ -1,8 +1,8 @@
 package com.sparta.outsourcing.domain.comment.entity;
 
 import com.sparta.outsourcing.domain.comment.dto.CommentRequestDto;
-import com.sparta.outsourcing.domain.post.controller.model.Post;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
+import com.sparta.outsourcing.domain.post.model.Post;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
 import com.sparta.outsourcing.domain.user.model.User;
 import jakarta.persistence.Entity;
