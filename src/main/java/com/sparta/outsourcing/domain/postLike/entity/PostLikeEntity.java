@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "POST_LIKE")
+@Table(name = "TB_POST_LIKE")
 public class PostLikeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
