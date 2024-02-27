@@ -3,6 +3,7 @@ package com.sparta.outsourcing.post.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 
+import com.sparta.outsourcing.domain.post.controller.model.Post;
 import com.sparta.outsourcing.domain.post.dto.GetPostResponseDto;
 import com.sparta.outsourcing.domain.post.dto.PostRequestDto;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
@@ -20,6 +21,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 
 @ExtendWith(MockitoExtension.class)
 public class PostServiceTest {
@@ -91,8 +93,7 @@ public class PostServiceTest {
 		PostRequestDto postRequestDto2 = new PostRequestDto("제목수정", "내용수정");
 		User user = testUser();
 		PostEntity postEntity = new PostEntity(postRequestDto, user.toEntity());
-		given(postRepository.findByPostId(postEntity.getPostId())).willReturn(
-			Optional.of(postEntity));
+		given(postRepository.findByPostId(postEntity.getPostId())).willReturn();
 		//when
 		ResponseEntity<ResponseDto<?>> response = postService.updatePost(postEntity.getPostId(),
 			user, postRequestDto2);

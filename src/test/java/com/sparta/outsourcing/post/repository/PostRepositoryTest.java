@@ -3,6 +3,7 @@ package com.sparta.outsourcing.post.repository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.sparta.outsourcing.domain.post.controller.model.Post;
 import com.sparta.outsourcing.domain.post.dto.PostRequestDto;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import com.sparta.outsourcing.domain.post.repository.PostJpaRepository;
@@ -65,9 +66,9 @@ public class PostRepositoryTest {
 		PostEntity postEntity = testPost();
 		postRepository.save(postEntity);
 		//when
-		Optional<PostEntity> response = postRepository.findByPostId(postEntity.getPostId());
+		Post response = postRepository.findByPostId(postEntity.getPostId());
 		//then
-		assertEquals(postEntity.getPostId(),response.get().getPostId());
+		assertEquals(postEntity.getPostId(),response.getPostId());
 	}
 
 	@Test

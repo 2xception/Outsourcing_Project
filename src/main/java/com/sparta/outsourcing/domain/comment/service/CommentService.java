@@ -22,10 +22,10 @@ public class CommentService {
 
 	public CommentResponseDto addComment(long postId, CommentRequestDto request, User user) {
 
-		PostEntity post = postRepository.findByPostId(postId).get(); //임시
+		Post post = postRepository.findByPostId(postId);
 		User findUser = userRepository.userBy(user.toEntity().getUsername());
 		CommentEntity savedComment = commentRepository.save(
-			new CommentEntity(request, Post.from(post), findUser)); //임시
+			new CommentEntity(request, post, findUser));
 		return new CommentResponseDto(savedComment);
 	}
 }
