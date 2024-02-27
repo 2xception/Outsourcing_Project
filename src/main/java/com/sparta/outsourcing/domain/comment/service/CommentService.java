@@ -64,7 +64,6 @@ public class CommentService {
         ));
 
     return commentList.stream()
-    return commentRepository.findByPostEntityPostId(postId).stream()
         .map(commentEntity -> {
               long count = map.getOrDefault(commentEntity.getCommentId(), 0L);
               return Comment.from(commentEntity).toResponse(count);
