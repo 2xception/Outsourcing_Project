@@ -16,8 +16,10 @@ import com.sparta.outsourcing.domain.user.dto.ProfileResponseDto;
 import com.sparta.outsourcing.domain.user.dto.SignupRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupResponseDto;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
+import com.sparta.outsourcing.domain.user.model.Token;
 import com.sparta.outsourcing.domain.user.model.User;
 import com.sparta.outsourcing.domain.user.repository.UserRepository;
+import com.sparta.outsourcing.domain.user.repository.token.TokenRepository;
 import com.sparta.outsourcing.global.jwt.JwtUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,16 +31,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class UserService {
 
     private final UserRepository userRepository;
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
+    private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
-    @Transactional
     public SignupResponseDto signup(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
         String password = passwordEncoder.encode(requestDto.getPassword());
@@ -57,9 +59,21 @@ public class UserService {
         String password = requestDto.getPassword();
 
         User user = userRepository.userBy(username);
-        user.validatePassword(password, passwordEncoder);
 
-        return user.createToken(jwtUtil);
+        user.validatePassword(password, passwordEncoder);
+        String token = user.createToken(jwtUtil);
+
+        tokenRepository.save(token);
+
+        return token;
+    }
+
+    @Transactional
+    public void logout(String accessToken) {
+        Token token = tokenRepository.findBy(accessToken);
+        token.expireToken();
+
+        tokenRepository.update(token);
     }
 
     public ProfileResponseDto getProfile(User user) {
