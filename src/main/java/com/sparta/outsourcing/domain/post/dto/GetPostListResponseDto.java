@@ -14,6 +14,7 @@ public class GetPostListResponseDto {
 	private String content;
 	private String nickname;
 	private Long views;
+	private Integer likes;
 	private LocalDateTime createdAt;
 
 	public GetPostListResponseDto(PostEntity postEntity) {
@@ -25,5 +26,14 @@ public class GetPostListResponseDto {
 		this.nickname = postEntity.getUserEntity().getNickname();
 		this.views = postEntity.getViews();
 		this.createdAt = postEntity.getCreatedAt();
+	}
+
+	public GetPostListResponseDto(String title, String content, int size, Long views,
+			String nickname) {
+		this.title = title;
+		this.content = content;
+		this.likes = size;
+		this.views = views;
+		this.nickname = nickname;
 	}
 }
