@@ -9,8 +9,10 @@ import com.sparta.outsourcing.domain.user.repository.UserRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
+@Transactional
 @Service
 public class CommentLikeService {
 
@@ -28,7 +30,7 @@ public class CommentLikeService {
         commentId, user.toEntity().getUserId());
 
     if (liked.isPresent()) {
-      throw new IllegalArgumentException("이미 좋아요 눌렀음");
+      throw new IllegalArgumentException("이미 좋아요 눌렀습니다.");
     }
 
     commentLikeRepository.like(new CommentLikeEntity(findComment, findUser));
@@ -42,7 +44,7 @@ public class CommentLikeService {
         commentId, user.toEntity().getUserId());
 
     if (liked.isEmpty()) {
-      throw new IllegalArgumentException("좋아요 안눌렀음");
+      throw new IllegalArgumentException("좋아요를 누르지 않았습니다.");
     }
 
     commentLikeRepository.deleteLike(liked.orElseThrow());

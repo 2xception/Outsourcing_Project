@@ -3,6 +3,7 @@ package com.sparta.outsourcing.domain.comment.repository;
 import com.sparta.outsourcing.domain.comment.entity.CommentEntity;
 import com.sparta.outsourcing.domain.comment.model.Comment;
 import java.util.List;
+import java.util.NoSuchElementException;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ public class CommentRepositoryImpl implements CommentRepository {
   @Override
   public Comment findById(long commentId) {
     return Comment.from(commentJpaRepository.findById(commentId)
-        .orElseThrow(() -> new IllegalArgumentException("없는 댓글입니다.")));
+        .orElseThrow(() -> new NoSuchElementException("없는 댓글입니다.")));
   }
 
   @Override

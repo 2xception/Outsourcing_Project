@@ -1,7 +1,7 @@
 package com.sparta.outsourcing.domain.commentLike.repository;
 
 import com.sparta.outsourcing.domain.comment.entity.CommentEntity;
-import com.sparta.outsourcing.domain.commentLike.dto.CommentLikeRequestDto;
+import com.sparta.outsourcing.domain.commentLike.dto.CommentLikeByComment;
 import com.sparta.outsourcing.domain.commentLike.entity.CommentLikeEntity;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +16,6 @@ public class CommentLikeRepositoryImpl implements CommentLikeRepository {
 
   @Override
   public Optional<CommentLikeEntity> findByCommentAndUser(long commentId, long userId) {
-
     return commentLikeJpaRepository.findByCommentEntityCommentIdAndUserEntityUserId(
         commentId, userId);
   }
@@ -37,7 +36,7 @@ public class CommentLikeRepositoryImpl implements CommentLikeRepository {
   }
 
   @Override
-  public List<CommentLikeRequestDto> countAllByComment(List<Long> commentIdList) {
+  public List<CommentLikeByComment> countAllByComment(List<Long> commentIdList) {
     return commentLikeJpaRepository.countAllByCommentEntity(commentIdList);
   }
 

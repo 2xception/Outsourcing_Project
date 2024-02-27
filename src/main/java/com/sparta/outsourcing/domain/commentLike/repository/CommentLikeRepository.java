@@ -1,7 +1,7 @@
 package com.sparta.outsourcing.domain.commentLike.repository;
 
 import com.sparta.outsourcing.domain.comment.entity.CommentEntity;
-import com.sparta.outsourcing.domain.commentLike.dto.CommentLikeRequestDto;
+import com.sparta.outsourcing.domain.commentLike.dto.CommentLikeByComment;
 import com.sparta.outsourcing.domain.commentLike.entity.CommentLikeEntity;
 import java.util.List;
 import java.util.Optional;
@@ -16,5 +16,5 @@ public interface CommentLikeRepository {
 
   long countByComment(CommentEntity commentEntity);
 
-  List<CommentLikeRequestDto> countAllByComment(List<Long> commentIdList);
+  List<CommentLikeByComment> countAllByComment(List<Long> commentIdList);
 }
