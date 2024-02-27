@@ -2,6 +2,7 @@ package com.sparta.outsourcing.domain.post.repository;
 
 import com.sparta.outsourcing.domain.post.controller.model.Post;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
+import com.sparta.outsourcing.domain.user.model.User;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

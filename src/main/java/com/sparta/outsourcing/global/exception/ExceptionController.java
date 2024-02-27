@@ -3,11 +3,11 @@ package com.sparta.outsourcing.global.exception;
 import com.sparta.outsourcing.global.commonDto.ExceptionDto;
 import io.jsonwebtoken.JwtException;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.security.access.AccessDeniedException;
 import java.util.NoSuchElementException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -41,7 +41,7 @@ public class ExceptionController {
 		JwtException.class,
 		AccessDeniedException.class
 	})
-	public ResponseEntity<ExceptionDto> handleJwtException(JwtException e) {
+	public ResponseEntity<ExceptionDto> handleJwtException(Exception e) {
 		return createResponse(HttpStatus.FORBIDDEN, e.getMessage());
 	}
 

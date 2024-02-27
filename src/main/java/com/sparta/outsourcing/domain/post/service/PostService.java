@@ -7,7 +7,6 @@ import com.sparta.outsourcing.domain.post.dto.PostRequestDto;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import com.sparta.outsourcing.domain.post.repository.PostRepository;
 import com.sparta.outsourcing.domain.user.model.User;
-import io.jsonwebtoken.JwtException;
 import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
@@ -51,23 +50,17 @@ public class PostService {
 	public GetPostResponseDto updatePost(Long id, User user,
 		PostRequestDto requestDto) {
 		Post post = postRepository.findByPostId(id);
-		forBiddenPost(post,user);
+		post.checkForbidden(user.toEntity().getUserId());
 		post.update(requestDto);
 		postRepository.update(post);
 		return post.ResponseDto();
 	}
 
 	@Transactional
-	public GetPostResponseDto deletePost(Long id, User user) {
+	public void deletePost(Long id, User user) {
 		Post post = postRepository.findByPostId(id);
-		forBiddenPost(post,user);
+		post.checkForbidden(user.toEntity().getUserId());
 		postRepository.delete(post);
-		return post.ResponseDto();
 	}
 
-	public void forBiddenPost(Post post,User user){
-		if(!Objects.equals(post.getUserEntity().getUserId(), user.toEntity().getUserId())){
-			throw new AccessDeniedException("권한이 없습니다.");
-		}
-	}
 }

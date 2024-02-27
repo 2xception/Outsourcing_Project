@@ -5,9 +5,11 @@ import com.sparta.outsourcing.domain.post.dto.PostRequestDto;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 
 @Getter
 @NoArgsConstructor
@@ -62,6 +64,12 @@ public class Post {
 	public void update(PostRequestDto requestDto) {
 		this.title = requestDto.getTitle();
 		this.content = requestDto.getContent();
+	}
+
+	public void checkForbidden(Long id){
+		if(!Objects.equals(userEntity.getUserId(), id)){
+			throw new AccessDeniedException("해당 게시물을 수정/삭제 하실 권한이 없습니다.");
+		}
 	}
 
 }
