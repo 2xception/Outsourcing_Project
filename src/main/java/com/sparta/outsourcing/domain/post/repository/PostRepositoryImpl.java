@@ -2,7 +2,6 @@ package com.sparta.outsourcing.domain.post.repository;
 
 import com.sparta.outsourcing.domain.post.controller.model.Post;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
-import com.sparta.outsourcing.domain.user.model.User;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +15,9 @@ public class PostRepositoryImpl implements PostRepository {
 
 	@Override
 	public Post findByPostId(Long id) {
-		return Post.from(postJpaRepository.findById(id).orElseThrow(()->
-				new EntityNotFoundException("해당 id값의 게시글이 없습니다.")
-			));
+		return Post.from(postJpaRepository.findById(id).orElseThrow(() ->
+			new EntityNotFoundException("해당 id값의 게시글이 없습니다.")
+		));
 	}
 
 	@Override
