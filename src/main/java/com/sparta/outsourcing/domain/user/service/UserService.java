@@ -106,6 +106,6 @@ public class UserService {
     public ProfileResponseDto getOtherProfile(Long id) {
         User user = userRepository.userById(id);
 
-        return user.profileResponseDto();
+        return getProfile(user);
     }
 }
