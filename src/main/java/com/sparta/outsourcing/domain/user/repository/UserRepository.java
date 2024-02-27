@@ -10,4 +10,8 @@ public interface UserRepository {
     void save(UserEntity userEntity);
 
     User userBy(String username);
+
+    void update(User user);
+
+    User userById(Long id);
 }

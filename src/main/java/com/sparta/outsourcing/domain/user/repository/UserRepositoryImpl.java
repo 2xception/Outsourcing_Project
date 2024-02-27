@@ -29,4 +29,16 @@ public class UserRepositoryImpl implements UserRepository{
             () -> new NoSuchElementException("사용자를 찾을 수 없습니다.")
         ));
     }
+
+    @Override
+    public void update(User user) {
+        userJpaRepository.saveAndFlush(user.toEntity());
+    }
+
+    @Override
+    public User userById(Long id) {
+        return User.from(userJpaRepository.findById(id).orElseThrow(
+            () -> new NoSuchElementException("사용자를 찾을 수 없습니다.")
+        ));
+    }
 }
