@@ -25,58 +25,58 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PostController {
 
-	private final PostService postService;
+  private final PostService postService;
 
-	@PostMapping("/api/posts")
-	@Operation(summary = "Post 작성")
-	public ResponseEntity<ResponseDto<?>> createPost(
-		@UserInfo User user,
-		@RequestBody @Valid PostRequestDto requestDto) {
+  @PostMapping("/api/posts")
+  @Operation(summary = "Post 작성")
+  public ResponseEntity<ResponseDto<?>> createPost(
+      @UserInfo User user,
+      @RequestBody @Valid PostRequestDto requestDto) {
 
-		return postService.createPost(user, requestDto);
-	}
+    return postService.createPost(user, requestDto);
+  }
 
-	@GetMapping("/api/posts")
-	@Operation(summary = "Post 작성순 전체 조회")
-	public ResponseEntity<ResponseDto<?>> getOrderDatePost() {
+  @GetMapping("/api/posts")
+  @Operation(summary = "Post 작성순 전체 조회")
+  public ResponseEntity<ResponseDto<?>> getOrderDatePost() {
 
-		return postService.getOrderDatePost();
-	}
+    return postService.getOrderDatePost();
+  }
 
-	@GetMapping("/api/posts/order-views")
-	@Operation(summary = "Post 조회순 전체 조회")
-	public ResponseEntity<ResponseDto<?>> getOrderViewPost() {
-		return postService.getOrderViewPost();
-	}
+  @GetMapping("/api/posts/order-views")
+  @Operation(summary = "Post 조회순 전체 조회")
+  public ResponseEntity<ResponseDto<?>> getOrderViewPost() {
+    return postService.getOrderViewPost();
+  }
 
-	@GetMapping("/api/posts/{id}")
-	@Operation(summary = "특정 Post 조회")
-	public ResponseEntity<ResponseDto<?>> getPost(@PathVariable Long id) {
-		return postService.getPost(id);
-	}
+  @GetMapping("/api/posts/{id}")
+  @Operation(summary = "특정 Post 조회")
+  public ResponseEntity<ResponseDto<?>> getPost(@PathVariable Long id) {
+    return postService.getPost(id);
+  }
 
-	@PatchMapping("/api/posts/{id}")
-	@Operation(summary = "Post 수정")
-	public ResponseEntity<ResponseDto<?>> updatePost(
-		@PathVariable Long id,
-		@UserInfo User user,
-		@RequestBody @Valid PostRequestDto requestDto) {
+  @PatchMapping("/api/posts/{id}")
+  @Operation(summary = "Post 수정")
+  public ResponseEntity<ResponseDto<?>> updatePost(
+      @PathVariable Long id,
+      @UserInfo User user,
+      @RequestBody @Valid PostRequestDto requestDto) {
 
-		return postService.updatePost(id, user, requestDto);
-	}
+    return postService.updatePost(id, user, requestDto);
+  }
 
-	@DeleteMapping("/api/posts/{id}")
-	@Operation(summary = "Post 삭제")
-	public ResponseEntity<ResponseDto<?>> deletePost(
-		@PathVariable Long id,
-		@UserInfo User user) {
+  @DeleteMapping("/api/posts/{id}")
+  @Operation(summary = "Post 삭제")
+  public ResponseEntity<ResponseDto<?>> deletePost(
+      @PathVariable Long id,
+      @UserInfo User user) {
 
-		return postService.deletePost(id, user);
-	}
+    return postService.deletePost(id, user);
+  }
 
   //게시물전체조회 - 내가 좋아요표시
   @GetMapping("/api/posts/my-likes")
-  public ResponseEntity<ResponseDto<List<GetPostListResponseDto>>> getPostsSortedByLikes (
+  public ResponseEntity<ResponseDto<List<GetPostListResponseDto>>> getPostsSortedByLikes(
       @UserInfo User user
   ) {
     return ResponseEntity.ok()
@@ -88,7 +88,7 @@ public class PostController {
 
   //게시물전체조회 - 내가 팔로우한
   @GetMapping("/api/posts/order-follows")
-  public ResponseEntity<ResponseDto<List<GetPostListResponseDto>>> getPostsSortedByFollow (
+  public ResponseEntity<ResponseDto<List<GetPostListResponseDto>>> getPostsSortedByFollow(
       @UserInfo User user
   ) {
     return ResponseEntity.ok()
@@ -100,7 +100,7 @@ public class PostController {
 
   //게시물전체조회 - 좋아요순
   @GetMapping("/api/posts/order-likes")
-  public ResponseEntity<ResponseDto<List<GetPostListResponseDto>>> getPosts () {
+  public ResponseEntity<ResponseDto<List<GetPostListResponseDto>>> getPosts() {
     return ResponseEntity.ok()
         .body(ResponseDto.<List<GetPostListResponseDto>>builder()
             .message("게시물 전체 조회 성공")
