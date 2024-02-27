@@ -34,5 +34,4 @@ public class Comment {
         comment
     );
   }
-
 }

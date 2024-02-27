@@ -19,10 +19,10 @@ public class PostLikeService {
 
   //게시물 좋아요 추가
   public void addLike(Long postId, User user) {
-    PostEntity post = postRepository.finById(postId).orElseThrow(() -> new IllegalArgumentException("존재하지않는 게시글입니다."));
-    Optional<PostLikeEntity> postLikeEntity = postLikeRepository.findByIdAndUser(postId, user);
+    PostEntity findPost = postRepository.finById(postId).orElseThrow(() -> new IllegalArgumentException("존재하지않는 게시글입니다."));
+    Optional<PostLikeEntity> postLikeEntity = postLikeRepository.findByUserEntityAndPostEntity(user.toEntity(), findPost);
     if(postLikeEntity.isEmpty()) {
-      postLikeRepository.save(new PostLikeEntity(post, user.toEntity()));
+      postLikeRepository.save(new PostLikeEntity(findPost, user.toEntity()));
     } else {
       throw new IllegalArgumentException("이미 좋아요를 누른 게시글입니다.");
     }
@@ -30,8 +30,8 @@ public class PostLikeService {
 
   //게시물 좋아요 삭제
   public void deleteLike(Long postId, User user) {
-    PostEntity post = postRepository.finById(postId).orElseThrow(() -> new IllegalArgumentException("존재하지않는 게시글입니다."));
-    Optional<PostLikeEntity> postLikeEntity = postLikeRepository.findByIdAndUser(postId, user);
+    PostEntity findPost = postRepository.finById(postId).orElseThrow(() -> new IllegalArgumentException("존재하지않는 게시글입니다."));
+    Optional<PostLikeEntity> postLikeEntity = postLikeRepository.findByUserEntityAndPostEntity(user.toEntity(), findPost);
     if(postLikeEntity.isEmpty()) {
       throw new IllegalArgumentException("좋아요를 누르지 않은 게시글입니다.");
     } else {

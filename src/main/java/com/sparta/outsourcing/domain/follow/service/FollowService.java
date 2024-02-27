@@ -5,6 +5,7 @@ import com.sparta.outsourcing.domain.follow.repository.FollowRepository;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
 import com.sparta.outsourcing.domain.user.model.User;
 import com.sparta.outsourcing.domain.user.repository.UserRepository;
+import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,10 @@ public class FollowService {
   //팔로우
   public void follow(User user, Long id) {
     UserEntity findUser = userRepository.finById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저입니다."));
-    Optional<FollowEntity> follow = followRepository.findByUserAndId(user,id);
+    if(Objects.equals(user.toEntity().getUserId(), findUser.getUserId())) {
+      throw new IllegalArgumentException("자기 자신은 팔로우 할 수 없습니다.");
+    }
+    Optional<FollowEntity> follow = followRepository.findByFollowerAndFollowing(user.toEntity(), findUser);
     if(follow.isEmpty()) {
       followRepository.save(new FollowEntity(user.toEntity(), findUser));
     } else {
@@ -31,7 +35,8 @@ public class FollowService {
 
   //언팔로우
   public void unfollow(User user, Long id) {
-    Optional<FollowEntity> follow = followRepository.findByUserAndId(user,id);
+    UserEntity findUser = userRepository.finById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저입니다."));
+    Optional<FollowEntity> follow = followRepository.findByFollowerAndFollowing(user.toEntity(), findUser);
     if(follow.isEmpty()) {
       throw new IllegalArgumentException("팔로우 하고 있지 않은 사용자입니다.");
     } else {

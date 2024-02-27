@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FollowJpaRepository extends JpaRepository<FollowEntity, Long> {
 
-  List<UserEntity> findAllByUser(User user);
+  List<FollowEntity> findAllByFollower(UserEntity follower);
 
-  Optional<FollowEntity> findByUserAndId(User user, Long id);
+  Optional<FollowEntity> findByFollowerAndFollowing(UserEntity follower, UserEntity following);
 }

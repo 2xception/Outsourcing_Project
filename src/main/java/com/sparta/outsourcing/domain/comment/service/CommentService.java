@@ -4,7 +4,7 @@ import com.sparta.outsourcing.domain.comment.dto.CommentRequestDto;
 import com.sparta.outsourcing.domain.comment.dto.CommentResponseDto;
 import com.sparta.outsourcing.domain.comment.entity.CommentEntity;
 import com.sparta.outsourcing.domain.comment.repository.CommentRepository;
-import com.sparta.outsourcing.domain.post.controller.model.Post;
+import com.sparta.outsourcing.domain.post.model.Post;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import com.sparta.outsourcing.domain.post.repository.PostRepository;
 import com.sparta.outsourcing.domain.user.model.User;

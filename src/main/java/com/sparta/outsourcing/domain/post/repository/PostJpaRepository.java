@@ -12,8 +12,6 @@ import org.springframework.stereotype.Repository;
 
 public interface PostJpaRepository extends JpaRepository<PostEntity, Long> {
 
-  List<PostLikeEntity> findAllByUser(User user);
-
 	List<PostEntity> findAllByOrderByCreatedAtDesc();
 
 	List<PostEntity> findAllByOrderByViewsDesc();

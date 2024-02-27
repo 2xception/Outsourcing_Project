@@ -16,13 +16,13 @@ public class FollowRepositoryImpl implements FollowRepository {
   private final FollowJpaRepository followJpaRepository;
 
   @Override
-  public List<UserEntity> findAllByUser(User user) {
-    return followJpaRepository.findAllByUser(user);
+  public List<FollowEntity> findAllByFollower(UserEntity follower) {
+    return followJpaRepository.findAllByFollower(follower);
   }
 
   @Override
-  public Optional<FollowEntity> findByUserAndId(User user, Long id) {
-    return followJpaRepository.findByUserAndId(user, id);
+  public Optional<FollowEntity> findByFollowerAndFollowing(UserEntity follower, UserEntity following) {
+    return followJpaRepository.findByFollowerAndFollowing(follower, following);
   }
 
   @Override

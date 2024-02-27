@@ -1,5 +1,6 @@
 package com.sparta.outsourcing.domain.user.entity;
 
+import com.sparta.outsourcing.domain.follow.entity.FollowEntity;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,11 +38,14 @@ public class UserEntity {
     @Column(nullable = false, unique = true)
     private String nickname;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String photo;
 
-    @OneToMany(mappedBy = "postEntity")
+    @OneToMany(mappedBy = "userEntity")
     private List<PostEntity> postList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "following")
+    private List<FollowEntity> followingList = new ArrayList<>();
 
     public UserEntity(String username, String password, String email, String nickname,
         String photo) {
@@ -57,5 +61,15 @@ public class UserEntity {
         this.password = password;
         this.email = email;
         this.nickname = nickname;
+    }
+
+    public UserEntity(Long userId, String username, String password, String email, String nickname,
+        String photo) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.nickname = nickname;
+        this.photo = photo;
     }
 }

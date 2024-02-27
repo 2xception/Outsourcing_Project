@@ -21,21 +21,35 @@ public class PostLikeController {
 
   //게시물 좋아요 추가
   @PostMapping("{postId}/likes")
-  public ResponseEntity<ResponseDto> addLike (@PathVariable Long postId, @UserInfo User user) {
-    postLikeService.addLike(postId, user);
-    return ResponseEntity.ok()
-        .body(ResponseDto.builder()
-            .message("게시물 좋아요 추가 성공")
-            .build());
+  public ResponseEntity<ResponseDto> addLike(@PathVariable Long postId, @UserInfo User user) {
+    try {
+      postLikeService.addLike(postId, user);
+      return ResponseEntity.ok()
+          .body(ResponseDto.builder()
+              .message("게시물 좋아요 추가 성공")
+              .build());
+    } catch (Exception e) {
+      return ResponseEntity.badRequest()
+          .body(ResponseDto.builder()
+              .message(e.getMessage())
+              .build());
+    }
   }
 
   //게시물 좋아요 삭제
   @DeleteMapping("{postId}/likes")
-  public ResponseEntity<ResponseDto> deleteLike (@PathVariable Long postId, @UserInfo User user) {
-    postLikeService.deleteLike(postId, user);
-    return ResponseEntity.ok()
-        .body(ResponseDto.builder()
-            .message("게시물 좋아요 삭제 성공")
-            .build());
+  public ResponseEntity<ResponseDto> deleteLike(@PathVariable Long postId, @UserInfo User user) {
+    try {
+      postLikeService.deleteLike(postId, user);
+      return ResponseEntity.ok()
+          .body(ResponseDto.builder()
+              .message("게시물 좋아요 삭제 성공")
+              .build());
+    } catch (Exception e) {
+      return ResponseEntity.badRequest()
+          .body(ResponseDto.builder()
+              .message(e.getMessage())
+              .build());
+    }
   }
 }
