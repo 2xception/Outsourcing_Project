@@ -9,6 +9,7 @@ import com.sparta.outsourcing.domain.user.dto.SignupRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupResponseDto;
 import com.sparta.outsourcing.domain.user.repository.UserRepository;
 import com.sparta.outsourcing.domain.user.repository.token.TokenRepository;
+import com.sparta.outsourcing.domain.user.service.UserService;
 import com.sparta.outsourcing.global.jwt.JwtUtil;
 import com.sparta.outsourcing.user.fixture.TestUser;
 import com.sparta.outsourcing.user.mock.MockPasswordEncoder;
