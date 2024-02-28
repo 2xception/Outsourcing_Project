@@ -1,6 +1,7 @@
 package com.sparta.outsourcing.domain.post.entity;
 
 import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto;
+import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto2;
 import com.sparta.outsourcing.domain.post.dto.PostRequestDto;
 import com.sparta.outsourcing.domain.postLike.entity.PostLikeEntity;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
@@ -75,8 +76,8 @@ public class PostEntity {
   }
 
 
-  public GetPostListResponseDto toDto() {
-    return new GetPostListResponseDto(this.title, this.content, this.postLikeList.size(), this.views, this.userEntity.getNickname());
+  public GetPostListResponseDto2 toDto() {
+    return new GetPostListResponseDto2(this.title, this.content, this.postLikeList.size(), this.views, this.userEntity.getNickname());
   }
 
 	public PostEntity(PostRequestDto requestDto, UserEntity entity) {

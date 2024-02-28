@@ -1,6 +1,7 @@
 package com.sparta.outsourcing.domain.post.controller;
 
 import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto;
+import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto2;
 import com.sparta.outsourcing.domain.post.dto.PostRequestDto;
 import com.sparta.outsourcing.domain.post.service.PostService;
 import com.sparta.outsourcing.domain.user.model.User;
@@ -76,11 +77,11 @@ public class PostController {
 
   //게시물전체조회 - 내가 좋아요표시
   @GetMapping("/api/posts/my-likes")
-  public ResponseEntity<ResponseDto<List<GetPostListResponseDto>>> getPostsSortedByLikes(
+  public ResponseEntity<ResponseDto<List<GetPostListResponseDto2>>> getPostsSortedByLikes(
       @UserInfo User user
   ) {
     return ResponseEntity.ok()
-        .body(ResponseDto.<List<GetPostListResponseDto>>builder()
+        .body(ResponseDto.<List<GetPostListResponseDto2>>builder()
             .message("좋아요 표시한 게시물 전체 조회 성공")
             .data(postService.getPostsSortedByLikes(user))
             .build());
@@ -88,11 +89,11 @@ public class PostController {
 
   //게시물전체조회 - 내가 팔로우한
   @GetMapping("/api/posts/order-follows")
-  public ResponseEntity<ResponseDto<List<GetPostListResponseDto>>> getPostsSortedByFollow(
+  public ResponseEntity<ResponseDto<List<GetPostListResponseDto2>>> getPostsSortedByFollow(
       @UserInfo User user
   ) {
     return ResponseEntity.ok()
-        .body(ResponseDto.<List<GetPostListResponseDto>>builder()
+        .body(ResponseDto.<List<GetPostListResponseDto2>>builder()
             .message("팔로우한 유저 게시물 조회 성공")
             .data(postService.getPostsSortedByFollow(user))
             .build());
@@ -100,9 +101,9 @@ public class PostController {
 
   //게시물전체조회 - 좋아요순
   @GetMapping("/api/posts/order-likes")
-  public ResponseEntity<ResponseDto<List<GetPostListResponseDto>>> getPosts() {
+  public ResponseEntity<ResponseDto<List<GetPostListResponseDto2>>> getPosts() {
     return ResponseEntity.ok()
-        .body(ResponseDto.<List<GetPostListResponseDto>>builder()
+        .body(ResponseDto.<List<GetPostListResponseDto2>>builder()
             .message("게시물 전체 조회 성공")
             .data(postService.getPosts())
             .build());

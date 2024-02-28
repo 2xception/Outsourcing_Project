@@ -7,6 +7,7 @@ import static com.sparta.outsourcing.domain.post.service.StatusCheck.success;
 import com.sparta.outsourcing.domain.follow.entity.FollowEntity;
 import com.sparta.outsourcing.domain.follow.repository.FollowRepository;
 import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto;
+import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto2;
 import com.sparta.outsourcing.domain.post.dto.PostRequestDto;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import com.sparta.outsourcing.domain.post.model.Post;
@@ -38,7 +39,7 @@ public class PostService {
   private final FollowRepository followRepository;
 
   //게시물전체조회 - 내가 좋아요표시
-  public List<GetPostListResponseDto> getPostsSortedByLikes(User user) {
+  public List<GetPostListResponseDto2> getPostsSortedByLikes(User user) {
 
     List<PostLikeEntity> postLikeList = postLikeRepository.findAllByUserEntity(user.toEntity());
     if(postLikeList.isEmpty()) {
@@ -51,7 +52,7 @@ public class PostService {
   }
 
   //게시물전체조회 - 내가 팔로우한
-  public List<GetPostListResponseDto> getPostsSortedByFollow(User user) {
+  public List<GetPostListResponseDto2> getPostsSortedByFollow(User user) {
 
     List<FollowEntity> followingList = followRepository.findAllByFollower(user.toEntity());
     List<UserEntity> followingUser = followingList.stream().map(FollowEntity::getFollowing).toList();
@@ -65,7 +66,7 @@ public class PostService {
   }
 
   //게시물전체조회 - 좋아요순
-  public List<GetPostListResponseDto> getPosts() {
+  public List<GetPostListResponseDto2> getPosts() {
 		List<PostEntity> postList = postRepository.findAll();
 		postList.sort(Comparator.comparing((PostEntity post) -> post.getPostLikeList().size()).reversed());
 
