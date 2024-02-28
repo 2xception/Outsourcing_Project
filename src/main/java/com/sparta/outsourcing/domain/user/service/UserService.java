@@ -4,6 +4,7 @@ import com.sparta.outsourcing.domain.comment.dto.CommentResponseDto;
 import com.sparta.outsourcing.domain.comment.repository.CommentRepository;
 import com.sparta.outsourcing.domain.follow.entity.FollowEntity;
 import com.sparta.outsourcing.domain.follow.repository.FollowRepository;
+import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto;
 import com.sparta.outsourcing.domain.post.dto.GetPostResponseDto;
 import com.sparta.outsourcing.domain.post.repository.PostRepository;
 import com.sparta.outsourcing.domain.user.dto.ChangePasswordRequestDto;
