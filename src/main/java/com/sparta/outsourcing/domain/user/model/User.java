@@ -1,5 +1,6 @@
 package com.sparta.outsourcing.domain.user.model;
 
+import com.sparta.outsourcing.domain.user.dto.GetProfileResponseDto;
 import com.sparta.outsourcing.domain.user.dto.ProfileRequsetDto;
 import com.sparta.outsourcing.domain.user.dto.ProfileResponseDto;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;

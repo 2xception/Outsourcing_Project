@@ -14,6 +14,7 @@ public class ProfileResponseDto {
 	private String photo;
 	private List<GetPostResponseDto> myPosts;
 	private List<CommentResponseDto> myComments;
+	private List<GetProfileResponseDto> myFollowers;
 
 	public ProfileResponseDto(String nickname, String email, String photo) {
 		this.nickname = nickname;
@@ -27,5 +28,9 @@ public class ProfileResponseDto {
 
 	public void setMyComments(List<CommentResponseDto> myComments) {
 		this.myComments = myComments;
+	}
+
+	public void setMyFollowers(List<GetProfileResponseDto> myFollowers) {
+		this.myFollowers = myFollowers;
 	}
 }

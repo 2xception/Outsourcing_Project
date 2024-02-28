@@ -2,9 +2,12 @@ package com.sparta.outsourcing.domain.user.service;
 
 import com.sparta.outsourcing.domain.comment.dto.CommentResponseDto;
 import com.sparta.outsourcing.domain.comment.repository.CommentRepository;
+import com.sparta.outsourcing.domain.follow.entity.FollowEntity;
+import com.sparta.outsourcing.domain.follow.repository.FollowRepository;
 import com.sparta.outsourcing.domain.post.dto.GetPostResponseDto;
 import com.sparta.outsourcing.domain.post.repository.PostRepository;
 import com.sparta.outsourcing.domain.user.dto.ChangePasswordRequestDto;
+import com.sparta.outsourcing.domain.user.dto.GetProfileResponseDto;
 import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
 import com.sparta.outsourcing.domain.user.dto.ProfileRequsetDto;
 import com.sparta.outsourcing.domain.user.dto.ProfileResponseDto;
@@ -16,7 +19,9 @@ import com.sparta.outsourcing.domain.user.model.User;
 import com.sparta.outsourcing.domain.user.repository.UserRepository;
 import com.sparta.outsourcing.domain.user.repository.token.TokenRepository;
 import com.sparta.outsourcing.global.jwt.JwtUtil;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,6 +39,8 @@ public class UserService {
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final FollowRepository followRepository;
+
 
     public SignupResponseDto signup(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
@@ -74,18 +81,9 @@ public class UserService {
 
         ProfileResponseDto profileResponseDto = user.profileResponseDto();
 
-        List<GetPostResponseDto> postResponseDtos = postRepository
-            .findByUserEntityUserId(user.toEntity().getUserId()).stream()
-            .map(GetPostResponseDto::new)
-            .collect(Collectors.toList());
-
-        List<CommentResponseDto> commentResponseDtos = commentRepository
-            .findByUserEntityUserId(user.toEntity().getUserId()).stream()
-            .map(CommentResponseDto::new)
-            .collect(Collectors.toList());
-
-        profileResponseDto.setMyPosts(postResponseDtos);
-        profileResponseDto.setMyComments(commentResponseDtos);
+        profileResponseDto.setMyPosts(getPostResponseDtoListBy(user));
+        profileResponseDto.setMyComments(getCommentResponseDtoListBy(user));
+        profileResponseDto.setMyFollowers(getFollowerListBy(user));
 
         return profileResponseDto;
     }
@@ -116,4 +114,28 @@ public class UserService {
 
         return getProfile(user);
     }
+
+    public List<GetPostResponseDto> getPostResponseDtoListBy(User user) {
+        return postRepository
+            .findByUserEntityUserId(user.toEntity().getUserId()).stream()
+            .filter(Objects::nonNull)
+            .map(GetPostResponseDto::new)
+            .collect(Collectors.toList());
+    }
+
+    public List<CommentResponseDto> getCommentResponseDtoListBy(User user) {
+        return commentRepository
+            .findByUserEntityUserId(user.toEntity().getUserId()).stream()
+            .filter(Objects::nonNull)
+            .map(CommentResponseDto::new)
+            .collect(Collectors.toList());
+    }
+
+    public List<GetProfileResponseDto> getFollowerListBy(User user) {
+        return followRepository.findAllByFollowing(user.toEntity()).stream()
+            .filter(Objects::nonNull)
+            .map(followEntity -> new GetProfileResponseDto(followEntity.getFollower()))
+            .collect(Collectors.toList());
+    }
+
 }

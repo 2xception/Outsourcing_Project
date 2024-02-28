@@ -34,4 +34,9 @@ public class FollowRepositoryImpl implements FollowRepository {
   public void delete(FollowEntity followEntity) {
     followJpaRepository.delete(followEntity);
   }
+
+  @Override
+  public List<FollowEntity> findAllByFollowing(UserEntity following) {
+    return followJpaRepository.findAllByFollowing(following);
+  }
 }
