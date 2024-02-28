@@ -1,4 +1,4 @@
-package com.sparta.outsourcing.domain.post.controller.model;
+package com.sparta.outsourcing.domain.post.model;
 
 import com.sparta.outsourcing.domain.post.dto.GetPostResponseDto;
 import com.sparta.outsourcing.domain.post.dto.PostRequestDto;

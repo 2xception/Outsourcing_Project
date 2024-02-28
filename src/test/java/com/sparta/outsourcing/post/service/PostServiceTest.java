@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 
-import com.sparta.outsourcing.domain.post.controller.model.Post;
+import com.sparta.outsourcing.domain.post.model.Post;
 import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto;
 import com.sparta.outsourcing.domain.post.dto.GetPostResponseDto;
 import com.sparta.outsourcing.domain.post.dto.PostRequestDto;

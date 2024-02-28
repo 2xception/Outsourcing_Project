@@ -1,8 +1,9 @@
 package com.sparta.outsourcing.domain.post.entity;
 
+import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto;
 import com.sparta.outsourcing.domain.post.dto.PostRequestDto;
+import com.sparta.outsourcing.domain.postLike.entity.PostLikeEntity;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -12,10 +13,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,10 +56,28 @@ public class PostEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime createdAt;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	private UserEntity userEntity;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id")
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  private UserEntity userEntity;
+
+  @OneToMany(mappedBy = "postEntity")
+  private List<PostLikeEntity> postLikeList = new ArrayList<>();
+
+  public PostEntity(Long postId, String title, String content, Long views, LocalDateTime createdAt,
+      UserEntity userEntity) {
+    this.postId = postId;
+    this.title = title;
+    this.content = content;
+    this.views = views;
+    this.createdAt = createdAt;
+    this.userEntity = userEntity;
+  }
+
+
+  public GetPostListResponseDto toDto() {
+    return new GetPostListResponseDto(this.title, this.content, this.postLikeList.size(), this.views, this.userEntity.getNickname());
+  }
 
 	public PostEntity(PostRequestDto requestDto, UserEntity entity) {
 		this.title = requestDto.getTitle();

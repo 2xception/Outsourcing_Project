@@ -1,13 +1,17 @@
 package com.sparta.outsourcing.domain.post.repository;
 
-import com.sparta.outsourcing.domain.post.controller.model.Post;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
-import com.sparta.outsourcing.domain.user.model.User;
+import com.sparta.outsourcing.domain.post.model.Post;
 import java.util.List;
+import java.util.Optional;
 
 public interface PostRepository {
 
 	Post findByPostId(Long id);
+
+	List<PostEntity> findAll();
+
+	Optional<PostEntity> finById(Long postId);
 
 	void save(PostEntity todoEntity);
 
@@ -19,4 +23,5 @@ public interface PostRepository {
 
 	List<PostEntity> findAllByOrderByViewsDesc();
 
+	List<PostEntity> findByUserEntityUserId(Long userId);
 }

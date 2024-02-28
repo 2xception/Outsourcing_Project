@@ -1,7 +1,11 @@
 package com.sparta.outsourcing.domain.user.model;
 
+import com.sparta.outsourcing.domain.user.dto.GetProfileResponseDto;
+import com.sparta.outsourcing.domain.user.dto.ProfileRequsetDto;
+import com.sparta.outsourcing.domain.user.dto.ProfileResponseDto;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
 import com.sparta.outsourcing.global.jwt.JwtUtil;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -48,4 +52,35 @@ public class User {
     public String createToken(JwtUtil jwtUtil) {
         return jwtUtil.createToken(username);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof User user)) {
+            return false;
+        }
+        return Objects.equals(username, user.username) && Objects.equals(email,
+            user.email) && Objects.equals(nickname, user.nickname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, email, nickname);
+    }
+
+    public void update(ProfileRequsetDto requsetDto) {
+        this.nickname = requsetDto.getNickname();
+        this.photo = requsetDto.getPhoto();
+    }
+
+    public void changePassword(String newPassword) {
+        this.password = newPassword;
+    }
+
+    public ProfileResponseDto profileResponseDto() {
+        return new ProfileResponseDto(nickname, email, photo);
+    }
+
 }

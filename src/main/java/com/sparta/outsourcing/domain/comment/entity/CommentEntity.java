@@ -1,8 +1,8 @@
 package com.sparta.outsourcing.domain.comment.entity;
 
 import com.sparta.outsourcing.domain.comment.dto.CommentRequestDto;
-import com.sparta.outsourcing.domain.post.controller.model.Post;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
+import com.sparta.outsourcing.domain.post.model.Post;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
 import com.sparta.outsourcing.domain.user.model.User;
 import jakarta.persistence.Entity;
@@ -23,24 +23,24 @@ import lombok.NoArgsConstructor;
 @Table(name = "TB_COMMENT")
 public class CommentEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long commentId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long commentId;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private UserEntity userEntity;
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  private UserEntity userEntity;
 
-	@ManyToOne
-	@JoinColumn(name = "post_id")
-	private PostEntity postEntity;
+  @ManyToOne
+  @JoinColumn(name = "post_id")
+  private PostEntity postEntity;
 
-	private String comment;
+  private String comment;
 
-	public CommentEntity(CommentRequestDto request, Post post, User user) {
-		this.comment = request.getComment();
-		this.postEntity = post.toEntity();
-		this.userEntity = user.toEntity();
-	}
+  public CommentEntity(CommentRequestDto request, Post post, User user) {
+    this.comment = request.getComment();
+    this.postEntity = post.toEntity();
+    this.userEntity = user.toEntity();
+  }
 
 }

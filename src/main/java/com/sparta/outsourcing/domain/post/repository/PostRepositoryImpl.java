@@ -1,9 +1,10 @@
 package com.sparta.outsourcing.domain.post.repository;
 
-import com.sparta.outsourcing.domain.post.controller.model.Post;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
+import com.sparta.outsourcing.domain.post.model.Post;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,16 @@ import org.springframework.stereotype.Repository;
 public class PostRepositoryImpl implements PostRepository {
 
 	private final PostJpaRepository postJpaRepository;
+
+	@Override
+	public List<PostEntity> findAll() {
+		return postJpaRepository.findAll();
+	}
+
+	@Override
+	public Optional<PostEntity> finById(Long postId) {
+		return postJpaRepository.findById(postId);
+	}
 
 	@Override
 	public Post findByPostId(Long id) {
@@ -43,5 +54,10 @@ public class PostRepositoryImpl implements PostRepository {
 	@Override
 	public List<PostEntity> findAllByOrderByViewsDesc() {
 		return postJpaRepository.findAllByOrderByViewsDesc();
+	}
+
+	@Override
+	public List<PostEntity> findByUserEntityUserId(Long userId) {
+		return postJpaRepository.findByUserEntityUserId(userId);
 	}
 }

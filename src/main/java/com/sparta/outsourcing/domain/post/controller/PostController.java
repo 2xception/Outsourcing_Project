@@ -33,7 +33,7 @@ public class PostController {
 	public ResponseEntity<ResponseDto<GetPostResponseDto>> createPost(
 		@UserInfo User user,
 		@RequestBody @Valid PostRequestDto requestDto) {
-		GetPostResponseDto responseDto = postService.createPost(user,requestDto);
+		GetPostResponseDto responseDto = postService.createPost(user, requestDto);
 
 		return ResponseEntity.ok()
 			.body(ResponseDto.<GetPostResponseDto>builder()
@@ -84,7 +84,7 @@ public class PostController {
 		@PathVariable Long id,
 		@UserInfo User user,
 		@RequestBody @Valid PostRequestDto requestDto) {
-		GetPostResponseDto responseDto = postService.updatePost(id,user,requestDto);
+		GetPostResponseDto responseDto = postService.updatePost(id, user, requestDto);
 
 		return ResponseEntity.ok()
 			.body(ResponseDto.<GetPostResponseDto>builder()
@@ -98,12 +98,45 @@ public class PostController {
 	public ResponseEntity<ResponseDto<?>> deletePost(
 		@PathVariable Long id,
 		@UserInfo User user) {
-		postService.deletePost(id,user);
+		postService.deletePost(id, user);
 		return ResponseEntity.ok()
 			.body(ResponseDto.builder()
 				.message("게시물 삭제에 성공하셨습니다.")
 				.data(null)
 				.build());
 	}
-}
 
+	//게시물전체조회 - 내가 좋아요표시
+	@GetMapping("/api/posts/my-likes")
+	public ResponseEntity<ResponseDto<List<GetPostListResponseDto>>> getPostsSortedByLikes(
+		@UserInfo User user
+	) {
+		return ResponseEntity.ok()
+			.body(ResponseDto.<List<GetPostListResponseDto>>builder()
+				.message("좋아요 표시한 게시물 전체 조회 성공")
+				.data(postService.getPostsSortedByLikes(user))
+				.build());
+	}
+
+	//게시물전체조회 - 내가 팔로우한
+	@GetMapping("/api/posts/order-follows")
+	public ResponseEntity<ResponseDto<List<GetPostListResponseDto>>> getPostsSortedByFollow(
+		@UserInfo User user
+	) {
+		return ResponseEntity.ok()
+			.body(ResponseDto.<List<GetPostListResponseDto>>builder()
+				.message("팔로우한 유저 게시물 조회 성공")
+				.data(postService.getPostsSortedByFollow(user))
+				.build());
+	}
+
+	//게시물전체조회 - 좋아요순
+	@GetMapping("/api/posts/order-likes")
+	public ResponseEntity<ResponseDto<List<GetPostListResponseDto>>> getPosts() {
+		return ResponseEntity.ok()
+			.body(ResponseDto.<List<GetPostListResponseDto>>builder()
+				.message("게시물 전체 조회 성공")
+				.data(postService.getPosts())
+				.build());
+	}
+}

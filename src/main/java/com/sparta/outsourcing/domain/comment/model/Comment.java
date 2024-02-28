@@ -1,5 +1,7 @@
 package com.sparta.outsourcing.domain.comment.model;
 
+import com.sparta.outsourcing.domain.comment.dto.CommentRequestDto;
+import com.sparta.outsourcing.domain.comment.dto.CommentResponseDto;
 import com.sparta.outsourcing.domain.comment.entity.CommentEntity;
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
@@ -26,6 +28,14 @@ public class Comment {
     );
   }
 
+  public CommentResponseDto toResponse(long count) {
+    return new CommentResponseDto(
+        userEntity.getNickname(),
+        comment,
+        count
+    );
+  }
+
   public CommentEntity toEntity() {
     return new CommentEntity(
         commentId,
@@ -35,4 +45,7 @@ public class Comment {
     );
   }
 
+  public void updateComment(CommentRequestDto request) {
+    this.comment = request.getComment();
+  }
 }
