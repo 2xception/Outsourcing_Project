@@ -1,6 +1,7 @@
 package com.sparta.outsourcing.domain.post.entity;
 
 import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto;
+import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto2;
 import com.sparta.outsourcing.domain.post.dto.PostRequestDto;
 import com.sparta.outsourcing.domain.postLike.entity.PostLikeEntity;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
