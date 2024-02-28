@@ -1,7 +1,6 @@
 package com.sparta.outsourcing.domain.post.entity;
 
 import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto;
-import com.sparta.outsourcing.domain.post.dto.GetPostListResponseDto2;
 import com.sparta.outsourcing.domain.post.dto.PostRequestDto;
 import com.sparta.outsourcing.domain.postLike.entity.PostLikeEntity;
 import com.sparta.outsourcing.domain.user.entity.UserEntity;
@@ -41,39 +40,40 @@ public class PostEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long postId;
+	private Long postId;
 
-  @Column(nullable = false)
-  private String title;
+	@Column(nullable = false)
+	private String title;
 
-  @Column(nullable = false)
-  private String content;
+	@Column(nullable = false)
+	private String content;
 
-  @Column(nullable = false)
-  private Long views;
+	@Column(nullable = false)
+	private Long views;
 
-  @CreatedDate
-  @Column(updatable = false)
-  @Temporal(TemporalType.TIMESTAMP)
-  private LocalDateTime createdAt;
+	@CreatedDate
+	@Column(updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private LocalDateTime createdAt;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id")
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  private UserEntity userEntity;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private UserEntity userEntity;
 
-  @OneToMany(mappedBy = "postEntity")
-  private List<PostLikeEntity> postLikeList = new ArrayList<>();
+	@OneToMany(mappedBy = "postEntity")
+	private List<PostLikeEntity> postLikeList = new ArrayList<>();
 
-  public PostEntity(Long postId, String title, String content, Long views, LocalDateTime createdAt,
-      UserEntity userEntity) {
-    this.postId = postId;
-    this.title = title;
-    this.content = content;
-    this.views = views;
-    this.createdAt = createdAt;
-    this.userEntity = userEntity;
-  }
+	public PostEntity(Long postId, String title, String content, Long views,
+		LocalDateTime createdAt,
+		UserEntity userEntity) {
+		this.postId = postId;
+		this.title = title;
+		this.content = content;
+		this.views = views;
+		this.createdAt = createdAt;
+		this.userEntity = userEntity;
+	}
 
 
   public GetPostListResponseDto2 toDto() {

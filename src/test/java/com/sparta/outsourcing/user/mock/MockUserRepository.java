@@ -41,4 +41,19 @@ public class MockUserRepository implements UserRepository {
             .findAny()
             .orElseThrow(NoSuchElementException::new);
     }
+
+    @Override
+    public void update(User user) {
+
+    }
+
+    @Override
+    public User userById(Long id) {
+        return null;
+    }
+
+    @Override
+    public Optional<UserEntity> finById(Long id) {
+        return Optional.empty();
+    }
 }

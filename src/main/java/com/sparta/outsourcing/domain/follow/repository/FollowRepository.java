@@ -16,4 +16,6 @@ public interface FollowRepository {
   void save(FollowEntity followEntity);
 
   void delete(FollowEntity followEntity);
+
+  List<FollowEntity> findAllByFollowing(UserEntity following);
 }

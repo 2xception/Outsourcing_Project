@@ -5,14 +5,13 @@ import com.sparta.outsourcing.domain.post.model.Post;
 import java.util.List;
 import java.util.Optional;
 
-
 public interface PostRepository {
 
-  List<PostEntity> findAll();
+	Post findByPostId(Long id);
 
-  Optional<PostEntity> finById(Long postId);
+	List<PostEntity> findAll();
 
-	Optional<PostEntity> findByPostId(Long id);
+	Optional<PostEntity> finById(Long postId);
 
 	void save(PostEntity todoEntity);
 

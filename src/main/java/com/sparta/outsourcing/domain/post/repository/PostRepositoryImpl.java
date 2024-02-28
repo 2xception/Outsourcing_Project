@@ -2,6 +2,7 @@ package com.sparta.outsourcing.domain.post.repository;
 
 import com.sparta.outsourcing.domain.post.entity.PostEntity;
 import com.sparta.outsourcing.domain.post.model.Post;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -9,22 +10,25 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class PostRepositoryImpl implements PostRepository{
-  private final PostJpaRepository postJpaRepository;
+public class PostRepositoryImpl implements PostRepository {
 
-  @Override
-  public List<PostEntity> findAll() {
-    return postJpaRepository.findAll();
-  }
-
-  @Override
-  public Optional<PostEntity> finById(Long postId) {
-    return postJpaRepository.findById(postId);
-  }
+	private final PostJpaRepository postJpaRepository;
 
 	@Override
-	public Optional<PostEntity> findByPostId(Long id) {
-		return postJpaRepository.findById(id);
+	public List<PostEntity> findAll() {
+		return postJpaRepository.findAll();
+	}
+
+	@Override
+	public Optional<PostEntity> finById(Long postId) {
+		return postJpaRepository.findById(postId);
+	}
+
+	@Override
+	public Post findByPostId(Long id) {
+		return Post.from(postJpaRepository.findById(id).orElseThrow(() ->
+			new EntityNotFoundException("해당 id값의 게시글이 없습니다.")
+		));
 	}
 
 	@Override

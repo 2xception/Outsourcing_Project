@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 
+import com.sparta.outsourcing.domain.comment.repository.CommentRepository;
+import com.sparta.outsourcing.domain.follow.repository.FollowRepository;
+import com.sparta.outsourcing.domain.post.repository.PostRepository;
 import com.sparta.outsourcing.domain.user.dto.LoginRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupRequestDto;
 import com.sparta.outsourcing.domain.user.dto.SignupResponseDto;
@@ -42,6 +45,13 @@ public class UserServiceTest {
     private static final String TEST_TOKEN = "testToken";
     @Mock
     JwtUtil jwtUtil;
+    @Mock
+    PostRepository postRepository;
+    @Mock
+    CommentRepository commentRepository;
+    @Mock
+    FollowRepository followRepository;
+
     private UserService userService;
 
     @BeforeEach
@@ -50,7 +60,8 @@ public class UserServiceTest {
         TokenRepository tokenRepository = new MockTokenRepository();
         PasswordEncoder passwordEncoder = new MockPasswordEncoder();
 
-        userService = new UserService(userRepository, tokenRepository, passwordEncoder, jwtUtil);
+        userService = new UserService(userRepository, postRepository, commentRepository,
+            tokenRepository, passwordEncoder, jwtUtil, followRepository);
     }
 
     private <T> void setDto(T dto, String username, String password, String email) {
