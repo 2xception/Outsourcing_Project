@@ -56,28 +56,30 @@ public class PostEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime createdAt;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id")
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  private UserEntity userEntity;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private UserEntity userEntity;
 
-  @OneToMany(mappedBy = "postEntity")
-  private List<PostLikeEntity> postLikeList = new ArrayList<>();
+	@OneToMany(mappedBy = "postEntity")
+	private List<PostLikeEntity> postLikeList = new ArrayList<>();
 
-  public PostEntity(Long postId, String title, String content, Long views, LocalDateTime createdAt,
-      UserEntity userEntity) {
-    this.postId = postId;
-    this.title = title;
-    this.content = content;
-    this.views = views;
-    this.createdAt = createdAt;
-    this.userEntity = userEntity;
-  }
+	public PostEntity(Long postId, String title, String content, Long views,
+		LocalDateTime createdAt,
+		UserEntity userEntity) {
+		this.postId = postId;
+		this.title = title;
+		this.content = content;
+		this.views = views;
+		this.createdAt = createdAt;
+		this.userEntity = userEntity;
+	}
 
 
-  public GetPostListResponseDto toDto() {
-    return new GetPostListResponseDto(this.title, this.content, this.postLikeList.size(), this.views, this.userEntity.getNickname());
-  }
+	public GetPostListResponseDto toDto() {
+		return new GetPostListResponseDto(this.title, this.content, this.postLikeList.size(),
+			this.views, this.userEntity.getNickname());
+	}
 
 	public PostEntity(PostRequestDto requestDto, UserEntity entity) {
 		this.title = requestDto.getTitle();

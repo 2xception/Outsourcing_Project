@@ -25,6 +25,7 @@ public class GetPostListResponseDto {
 				: postEntity.getContent();
 		this.nickname = postEntity.getUserEntity().getNickname();
 		this.views = postEntity.getViews();
+		this.likes = postEntity.getPostLikeList().size();
 		this.createdAt = postEntity.getCreatedAt();
 	}
 

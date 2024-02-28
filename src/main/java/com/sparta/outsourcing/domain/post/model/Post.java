@@ -22,6 +22,7 @@ public class Post {
 	private Long views;
 	private LocalDateTime createdAt;
 	private UserEntity userEntity;
+	private Integer likes;
 
 	public static Post from(final PostEntity postEntity) {
 		return new Post(
@@ -30,7 +31,8 @@ public class Post {
 			postEntity.getContent(),
 			postEntity.getViews(),
 			postEntity.getCreatedAt(),
-			postEntity.getUserEntity()
+			postEntity.getUserEntity(),
+			postEntity.getPostLikeList().size()
 		);
 	}
 
@@ -52,6 +54,7 @@ public class Post {
 			content,
 			userEntity.getNickname(),
 			views,
+			likes,
 			createdAt
 		);
 	}
@@ -66,8 +69,8 @@ public class Post {
 		this.content = requestDto.getContent();
 	}
 
-	public void checkForbidden(Long id){
-		if(!Objects.equals(userEntity.getUserId(), id)){
+	public void checkForbidden(Long id) {
+		if (!Objects.equals(userEntity.getUserId(), id)) {
 			throw new AccessDeniedException("해당 게시물을 수정/삭제 하실 권한이 없습니다.");
 		}
 	}
