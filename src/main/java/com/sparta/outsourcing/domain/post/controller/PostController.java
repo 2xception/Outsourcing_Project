@@ -61,7 +61,7 @@ public class PostController {
 
 		return ResponseEntity.ok()
 			.body(ResponseDto.<List<GetPostListResponseDto>>builder()
-				.message("작성순 게시물 조회에 성공하셨습니다.")
+				.message("조회순 게시물 조회에 성공하셨습니다.")
 				.data(responseDtoList)
 				.build());
 	}

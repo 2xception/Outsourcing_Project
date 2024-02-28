@@ -48,12 +48,20 @@ public class PostRepositoryImpl implements PostRepository {
 
 	@Override
 	public List<PostEntity> findAllByOrderByCreatedAtDesc() {
-		return postJpaRepository.findAllByOrderByCreatedAtDesc();
+		 List<PostEntity> postList = postJpaRepository.findAllByOrderByCreatedAtDesc();
+		 if(postList.isEmpty()){
+			 throw new EntityNotFoundException("현재 작성된 게시물이 없습니다.");
+		 }
+		 return postList;
 	}
 
 	@Override
 	public List<PostEntity> findAllByOrderByViewsDesc() {
-		return postJpaRepository.findAllByOrderByViewsDesc();
+		List<PostEntity> postList = postJpaRepository.findAllByOrderByViewsDesc();
+		if(postList.isEmpty()){
+			throw new EntityNotFoundException("현재 작성된 게시물이 없습니다.");
+		}
+		return postList;
 	}
 
 	@Override
