@@ -34,6 +34,7 @@
 ###  🔨ERD DIAGRAM
 *********************
 <img src="https://teamsparta.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F83c75a39-3aba-4ba4-a792-7aefe4b07895%2Fd02b9696-dcd8-47e2-a58a-7b96d9389262%2F%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA_2024-02-28_%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE_3.20.40.png?table=block&id=84fb1391-79f6-4803-afe2-14df4f6cc8ff&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=2000&userId=&cache=v2"/>
+
 ###  📄KPT 회고
 *********************
 * **김형우**
