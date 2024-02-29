@@ -10,6 +10,7 @@
 *********************
 * **김형우** : Post 관련 API 제작 담당
 * **김범진** : Post조회, Follow, Like 관련 API 제작 담당
+* **서예진** : 프로필 관련 기능 구현
 ###  ⚙개발환경
 *********************
 <img src="https://img.shields.io/badge/Framework-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"><img src="https://img.shields.io/badge/3.22-515151?style=for-the-badge">
@@ -46,3 +47,7 @@
   * Keep: 프로젝트 설계단계에서 꼼꼼하고 정확하게 설계한것이 좋았다.
   * Problem: 글로벌 예외처리에 대해서 공부를 해야 할 것 같다.
   * Try: 해당 수업을 복습 해야겠다.
+* **서예진**
+  * Keep: git 이모지, 구글 코드 컨벤션 등 협업에 있어 새로운 방법으로 협업할 기회가 되는 프로젝트였다.
+  * Problem: 테스트 코드 작성에 있어 아직 부족함을 느꼈다.
+  * Try: 테스트 코드 관련 복습 및 블로그를 작성해야겠다.
