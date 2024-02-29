@@ -10,6 +10,7 @@
 *********************
 * **김형우** : Post 관련 API 제작 담당
 * **서예진** : 프로필 관련 기능 구현
+* **서예진** : 댓글 관련 기능 구현
 ###  ⚙개발환경
 *********************
 <img src="https://img.shields.io/badge/Framework-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"><img src="https://img.shields.io/badge/3.22-515151?style=for-the-badge">
@@ -46,3 +47,8 @@
   * Keep: git 이모지, 구글 코드 컨벤션 등 협업에 있어 새로운 방법으로 협업할 기회가 되는 프로젝트였다.
   * Problem: 테스트 코드 작성에 있어 아직 부족함을 느꼈다.
   * Try: 테스트 코드 관련 복습 및 블로그를 작성해야겠다.
+* **추정우**
+  * Keep: 모르는것이 많아 질문을 많이했는데, 알고있는것들을 친절하게 잘 알려주셔서 좋았다.
+  * Problem: model 레이어를 처음 써봐서 자신의 코드완성도가 낮았던것 같다.
+  * Try: 새로운 방법에 빨리익숙해지도록 노력해야겠다.
+
