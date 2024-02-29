@@ -11,6 +11,7 @@
 * **김형우** : Post 관련 API 제작 담당
 * **서예진** : 프로필 관련 기능 구현
 * **추정우** : 댓글 관련 기능 구현
+* **손준형** : 스켈렉톤 코드 작성 및 회원 관련 기능 구현
 ###  ⚙개발환경
 *********************
 <img src="https://img.shields.io/badge/Framework-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"><img src="https://img.shields.io/badge/3.22-515151?style=for-the-badge">
@@ -51,4 +52,7 @@
   * Keep: 모르는것이 많아 질문을 많이했는데, 알고있는것들을 친절하게 잘 알려주셔서 좋았다.
   * Problem: model 레이어를 처음 써봐서 자신의 코드완성도가 낮았던것 같다.
   * Try: 새로운 방법에 빨리익숙해지도록 노력해야겠다.
-
+* **손준형**
+  * Keep: 팀 프로젝트에 처음으로 테스트 코드를 붙여봤는데, 코드 관리가 편해진 것이 느껴져서 좋았다.
+  * Problem: 코드 컨벤션을 정했지만 지켜지지 않은 점이 분명이 존재하고, 이를 하나하나 모두 정하기에는 너무 힘들다.
+  * Try: 많은 회의를 통해 조금씩 고쳐나가야 할 것 같은데, 이런 방법에 익숙해지도록 노력해야겠다.
