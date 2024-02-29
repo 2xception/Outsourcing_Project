@@ -9,6 +9,7 @@
 ### 👷팀원소개
 *********************
 * **김형우** : Post 관련 API 제작 담당
+* **김범진** : Post조회, Follow, Like 관련 API 제작 담당
 ###  ⚙개발환경
 *********************
 <img src="https://img.shields.io/badge/Framework-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"><img src="https://img.shields.io/badge/3.22-515151?style=for-the-badge">
@@ -41,3 +42,7 @@
   * Keep: 코드의 분리와 단일 책임 원칙을 준수하기 위해 리포지토리를 나누어 사용하는 방법에 대하여 배울 수 있었습니다.
   * Problem: 재사용성을 높이기 위하여 리포지토리에서 예외까지 해결하였는데 작성하고 나서 회고 때 보니 레이어 맞지않는 역할을 주는 것 같아 개선이 필요하다고 생각했습니다.
   * Try: 따로 domain 계층을 추가해 레포지토리에서 처리하던 로직을 따로 빼내는 것으로 해결할 수 있을 것 같습니다.
+* **김범진**
+  * Keep: 프로젝트 설계단계에서 꼼꼼하고 정확하게 설계한것이 좋았다.
+  * Problem: 글로벌 예외처리에 대해서 공부를 해야 할 것 같다.
+  * Try: 해당 수업을 복습 해야겠다.

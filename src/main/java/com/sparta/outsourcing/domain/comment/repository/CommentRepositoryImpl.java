@@ -39,7 +39,6 @@ public class CommentRepositoryImpl implements CommentRepository {
     commentJpaRepository.saveAndFlush(commentEntity);
   }
 
-
   @Override
   public List<CommentEntity> findByUserEntityUserId(Long userId) {
     return commentJpaRepository.findByUserEntityUserId(userId);
