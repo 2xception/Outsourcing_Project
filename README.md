@@ -9,6 +9,7 @@
 ### 👷팀원소개
 *********************
 * **김형우** : Post 관련 API 제작 담당
+* **서예진** : 프로필 관련 기능 구현
 ###  ⚙개발환경
 *********************
 <img src="https://img.shields.io/badge/Framework-%23121011?style=for-the-badge"><img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"><img src="https://img.shields.io/badge/3.22-515151?style=for-the-badge">
